@@ -1,4 +1,4 @@
-function createStepper() {
+module.exports = function createStepper() {
     var running = false;
     var currentStep = 0;
     var steps;
@@ -31,4 +31,4 @@ function createStepper() {
         isRunning: isRunning,
         step: step
     }
-}
+};

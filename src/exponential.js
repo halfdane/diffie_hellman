@@ -1,8 +1,4 @@
-'use strict';
-
-window.dh = window.dh || {};
-
-window.dh.exponential = (function () {
+module.exports = (function () {
 
     function createScaler (canvasWidth, canvasHeight, ctx) {
         var iteration;

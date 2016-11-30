@@ -1,8 +1,4 @@
-'use strict';
-
-window.dh = window.dh || {};
-
-window.dh.intro = (function () {
+module.exports =  (function () {
 
     var maxWidth = 500,
             maxHeight = 500;

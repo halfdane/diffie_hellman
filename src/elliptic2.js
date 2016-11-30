@@ -1,8 +1,4 @@
-'use strict';
-
-window.dh = window.dh || {};
-
-window.dh.elliptic2 = (function () {
+module.exports = (function () {
 
     var a;
     var b;

@@ -6,14 +6,15 @@ import webpackConfig from './webpack.config.babel';
 import WebpackDevServer from 'webpack-dev-server';
 
 gulp.task('default', ['webpack']);
+gulp.task('watch', ['server', 'watchIt']);
 
 gulp.task('babel', () => {
-    return gulp.src('resources/js/*.js')
+    return gulp.src('src/*.js')
             .pipe(babel())
             .pipe(gulp.dest('target'));
 });
 
-gulp.task('webpack', function(callback) {
+gulp.task('webpack', ['babel'], function(callback) {
     var myConfig = Object.create(webpackConfig);
     myConfig.plugins = [
         new webpack.optimize.DedupePlugin(),
@@ -29,6 +30,10 @@ gulp.task('webpack', function(callback) {
         }));
         callback();
     });
+});
+
+gulp.task("watchIt", function() {
+    gulp.watch(["src/**/*", "index.html"], ["webpack"]);
 });
 
 gulp.task('server', ['webpack'], function(callback) {
