@@ -1,2 +1,200 @@
+.theCalculator .britnex {
+  height: 2em;
+  display: inline; }
+  .theCalculator .britnex.equals {
+    height: 3em; }
+  .theCalculator .britnex.hidden {
+    visibility: hidden; }
+
+.theCalculator .calculate_this {
+  text-align: center; }
+
+.formulare {
+  position: relative;
+  text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white; }
+  .formulare * {
+    position: absolute; }
+  .formulare .hidden {
+    visibility: hidden; }
+  .formulare .left {
+    left: 0; }
+  .formulare .right {
+    right: 0; }
+  .formulare .center {
+    left: 44%; }
+  .formulare .primegroup {
+    border: medium solid blue;
+    padding: 11px;
+    border-radius: 16px; }
+  .formulare .dh_formula1 {
+    top: 6.6em; }
+  .formulare .dh_formula2 {
+    top: 11em; }
+  .formulare .alice,
+  .formulare .bob,
+  .formulare .alice *,
+  .formulare .bob * {
+    font-weight: bold;
+    transition: all 1s ease-in-out;
+    transition-property: left, right, top; }
+  .formulare .alice {
+    left: 76px; }
+  .formulare .bob {
+    right: 170px; }
+  .formulare .bob.raw {
+    right: 335px; }
+  .formulare .g {
+    top: 34px; }
+  .formulare .p {
+    top: 92px; }
+  .formulare .a {
+    top: 150px; }
+  .formulare .bigA, .formulare .bigB {
+    top: 213px; }
+  .formulare .bigB.over {
+    top: 270px; }
+  .formulare .alice.bigB {
+    right: 80%;
+    left: auto; }
+  .formulare .alice.bigB.over {
+    right: 170px;
+    left: auto; }
+  .formulare .bob.bigB {
+    left: 80%;
+    right: auto; }
+  .formulare .bob.bigB.over {
+    left: 76px;
+    right: auto; }
+  .formulare .bigK {
+    top: 333px; }
+
+.kommutativ_formula {
+  text-align: center; }
+
+.kommutativ_original,
+.kommutativ_double,
+.kommutativ_final,
+.kommutativ_head {
+  position: relative; }
+
+.kommutativ .alice,
+.kommutativ .bob,
+.kommutativ_double {
+  transition: all 1s ease-in-out;
+  transition-property: margin-left, margin-right, margin-top; }
+
+.kommutativ .alice,
+.kommutativ .bob,
+.kommutativ .equals,
+.kommutativ_head * {
+  position: absolute; }
+
+.kommutativ .hidden {
+  visibility: hidden; }
+
+.kommutativ_original,
+.kommutativ_double,
+.kommutativ_final {
+  margin-top: 3em; }
+
+.kommutativ_double.down {
+  margin-top: 6em; }
+
+.kommutativ .left {
+  margin-left: 30%; }
+
+.kommutativ .right {
+  margin-left: 70%; }
+
+.kommutativ .center {
+  margin-left: 48%; }
+
+.modulo_11 {
+  position: relative;
+  width: 32em;
+  height: 32em;
+  margin: 1.75em auto 0; }
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%; }
+
+.mod {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  line-height: 4em;
+  width: 4em;
+  height: 4em;
+  margin: -2em; }
+
+.deg0 {
+  transform: rotate(0deg) translate(16em) rotate(0deg); }
+
+.deg0.highlight {
+  background-color: darkslateblue; }
+
+.deg32 {
+  transform: rotate(32deg) translate(16em) rotate(-32deg); }
+
+.deg32.highlight {
+  background-color: orangered; }
+
+.deg64 {
+  transform: rotate(64deg) translate(16em) rotate(-64deg); }
+
+.deg64.highlight {
+  background-color: darkcyan; }
+
+.deg96 {
+  transform: rotate(96deg) translate(16em) rotate(-96deg); }
+
+.deg96.highlight {
+  background-color: chartreuse; }
+
+.deg128 {
+  transform: rotate(128deg) translate(16em) rotate(-128deg); }
+
+.deg128.highlight {
+  background-color: coral; }
+
+.deg160 {
+  transform: rotate(160deg) translate(16em) rotate(-160deg); }
+
+.deg160.highlight {
+  background-color: gold; }
+
+.deg192 {
+  transform: rotate(192deg) translate(16em) rotate(-192deg); }
+
+.deg192.highlight {
+  background-color: brown; }
+
+.deg224 {
+  transform: rotate(224deg) translate(16em) rotate(-224deg); }
+
+.deg224.highlight {
+  background-color: darkorange; }
+
+.deg256 {
+  transform: rotate(256deg) translate(16em) rotate(-256deg); }
+
+.deg256.highlight {
+  background-color: lime; }
+
+.deg288 {
+  transform: rotate(288deg) translate(16em) rotate(-288deg); }
+
+.deg288.highlight {
+  background-color: orchid; }
+
+.deg320 {
+  transform: rotate(320deg) translate(16em) rotate(-320deg); }
+
+.deg320.highlight {
+  background-color: powderblue; }
+
 .slide .deck-before, .slide .deck-previous {
   opacity: 1.0; }

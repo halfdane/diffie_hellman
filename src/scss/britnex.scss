@@ -1,15 +1,18 @@
-.britnex {
-    height: 3em;
-    display: inline;
-}
-.britnex.equals {
-    height: 3em;
-}
+.theCalculator {
+    .britnex {
+        height: 2em;
+        display: inline;
 
-.britnex.hidden {
-    visibility: hidden;
-}
+        &.equals {
+            height: 3em;
+        }
 
-.calculate_this {
-    text-align: center;
+        &.hidden {
+            visibility: hidden;
+        }
+    }
+
+    .calculate_this {
+        text-align: center;
+    }
 }
