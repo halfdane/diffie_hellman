@@ -1,3 +1,4 @@
+const createStepper = require('./stepper.js');
 module.exports = (function () {
 
     function createScaler (canvasWidth, canvasHeight, ctx) {

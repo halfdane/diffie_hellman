@@ -1,3 +1,5 @@
+const createStepper = require('./stepper.js');
+
 module.exports =  (function () {
 
     var maxWidth = 500,

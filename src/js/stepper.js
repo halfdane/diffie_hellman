@@ -21,7 +21,7 @@ module.exports = function createStepper() {
     }
 
     function isRunning() {
-        return running;
+        return false;
     }
 
     return {
