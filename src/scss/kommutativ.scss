@@ -1,40 +1,50 @@
-.kommutativ_formula {
-  text-align: center; }
+.kommutativ_formula{
+    text-align: center;
+}
 
 .kommutativ_original,
 .kommutativ_double,
 .kommutativ_final,
 .kommutativ_head {
-  position: relative; }
+    position: relative;
+}
 
 .kommutativ .alice,
 .kommutativ .bob,
 .kommutativ_double {
-  transition: all 1s ease-in-out;
-  transition-property: margin-left, margin-right, margin-top; }
+    transition: all 1s ease-in-out;
+    transition-property: margin-left, margin-right, margin-top;
+}
 
 .kommutativ .alice,
 .kommutativ .bob,
 .kommutativ .equals,
 .kommutativ_head * {
-  position: absolute; }
+    position: absolute;
+}
 
 .kommutativ .hidden {
-  visibility: hidden; }
+    visibility: hidden;
+}
 
 .kommutativ_original,
 .kommutativ_double,
-.kommutativ_final {
-  margin-top: 3em; }
+.kommutativ_final{
+    margin-top: 3em;
+}
 
 .kommutativ_double.down {
-  margin-top: 6em; }
+    margin-top: 6em;
+}
 
 .kommutativ .left {
-  margin-left: 30%; }
+    margin-left: 30%;
+}
 
 .kommutativ .right {
-  margin-left: 70%; }
+    margin-left: 70%;
+}
 
 .kommutativ .center {
-  margin-left: 48%; }
+    margin-left: 48%;
+}

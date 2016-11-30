@@ -4,14 +4,25 @@ import gutil from 'gulp-util';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.babel';
 import WebpackDevServer from 'webpack-dev-server';
+import sass from 'gulp-sass';
 
-gulp.task('default', ['webpack']);
+gulp.task('default', ['webpack', 'styles']);
 gulp.task('watch', ['server', 'watchIt']);
 
 gulp.task('babel', () => {
     return gulp.src('src/*.js')
             .pipe(babel())
             .pipe(gulp.dest('target'));
+});
+
+gulp.task('watchIt', function() {
+    gulp.watch(['src/**/*', 'index.html'], ['webpack', 'styles']);
+});
+
+gulp.task('styles', function() {
+    gulp.src('src/scss/*.scss')
+            .pipe(sass().on('error', sass.logError))
+            .pipe(gulp.dest('./resources/css/'));
 });
 
 gulp.task('webpack', ['babel'], function(callback) {
@@ -30,10 +41,6 @@ gulp.task('webpack', ['babel'], function(callback) {
         }));
         callback();
     });
-});
-
-gulp.task("watchIt", function() {
-    gulp.watch(["src/**/*", "index.html"], ["webpack"]);
 });
 
 gulp.task('server', ['webpack'], function(callback) {

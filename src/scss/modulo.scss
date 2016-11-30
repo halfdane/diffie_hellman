@@ -1,0 +1,116 @@
+.modulo_11 {
+    position: relative;
+    width: 32em;
+    height: 32em;
+
+    margin: 1.75em auto 0;
+}
+
+.centered {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+}
+
+.mod {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    text-align: center;
+    line-height: 4em;
+    width: 4em;
+    height: 4em;
+    margin: -2em;
+}
+
+.deg0 {
+    transform: rotate(0deg) translate(16em) rotate(-0deg);
+}
+
+.deg0.highlight {
+    background-color: darkslateblue;
+}
+
+.deg32 {
+    transform: rotate(32deg) translate(16em) rotate(-32deg);
+}
+
+.deg32.highlight {
+    background-color: orangered;
+}
+
+.deg64 {
+    transform: rotate(64deg) translate(16em) rotate(-64deg);
+}
+
+.deg64.highlight {
+    background-color: darkcyan;
+}
+
+.deg96 {
+    transform: rotate(96deg) translate(16em) rotate(-96deg);
+}
+
+.deg96.highlight {
+    background-color: chartreuse;
+}
+
+.deg128 {
+    transform: rotate(128deg) translate(16em) rotate(-128deg);
+}
+
+.deg128.highlight {
+    background-color: coral;
+}
+
+.deg160 {
+    transform: rotate(160deg) translate(16em) rotate(-160deg);
+}
+
+.deg160.highlight {
+    background-color: gold;
+}
+
+.deg192 {
+    transform: rotate(192deg) translate(16em) rotate(-192deg);
+}
+
+.deg192.highlight {
+    background-color: brown;
+}
+
+.deg224 {
+    transform: rotate(224deg) translate(16em) rotate(-224deg);
+}
+
+.deg224.highlight {
+    background-color: darkorange;
+}
+
+.deg256 {
+    transform: rotate(256deg) translate(16em) rotate(-256deg);
+}
+
+.deg256.highlight {
+    background-color: lime;
+}
+
+.deg288 {
+    transform: rotate(288deg) translate(16em) rotate(-288deg);
+}
+
+.deg288.highlight {
+    background-color: orchid;
+}
+
+.deg320 {
+    transform: rotate(320deg) translate(16em) rotate(-320deg);
+}
+
+.deg320.highlight {
+    background-color: powderblue;
+}
+

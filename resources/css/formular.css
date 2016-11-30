@@ -1,103 +1,80 @@
 .formulare {
-    position: relative;
-    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
-}
+  position: relative;
+  text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white; }
 
 .formulare * {
-    position: absolute;
-}
+  position: absolute; }
 
 .formulare .hidden {
-    visibility: hidden;
-}
+  visibility: hidden; }
 
 .formulare .left {
-    left: 0;
-}
+  left: 0; }
 
 .formulare .right {
-    right: 0;
-}
+  right: 0; }
 
 .formulare .center {
-    left: 44%;
-}
+  left: 44%; }
 
 .formulare .primegroup {
-    border: medium solid blue;
-    padding: 11px;
-    border-radius: 16px;
-}
+  border: medium solid blue;
+  padding: 11px;
+  border-radius: 16px; }
 
 .formulare .dh_formula1 {
-    top: 6.6em;
-}
+  top: 6.6em; }
 
 .formulare .dh_formula2 {
-    top: 11em;
-}
+  top: 11em; }
 
 .formulare .alice,
 .formulare .bob,
 .formulare .alice *,
 .formulare .bob * {
-    font-weight: bold;
-    transition: all 1s ease-in-out;
-    transition-property: left, right, top;
-}
+  font-weight: bold;
+  transition: all 1s ease-in-out;
+  transition-property: left, right, top; }
 
 .formulare .alice {
-    left: 76px;
-}
+  left: 76px; }
 
 .formulare .bob {
-    right: 170px;
-}
+  right: 170px; }
 
 .formulare .bob.raw {
-    right: 335px;
-}
+  right: 335px; }
 
 .formulare .g {
-    top: 34px;
-}
+  top: 34px; }
 
 .formulare .p {
-    top: 92px;
-}
+  top: 92px; }
 
 .formulare .a {
-    top: 150px;
-}
+  top: 150px; }
 
 .formulare .bigA, .formulare .bigB {
-    top: 213px;
-}
+  top: 213px; }
 
 .formulare .bigB.over {
-    top: 270px;
-}
+  top: 270px; }
 
 .formulare .alice.bigB {
-    right: 80%;
-    left: auto;
-}
+  right: 80%;
+  left: auto; }
 
 .formulare .alice.bigB.over {
-    right: 170px;
-    left: auto;
-}
+  right: 170px;
+  left: auto; }
 
 .formulare .bob.bigB {
-    left: 80%;
-    right: auto;
-}
+  left: 80%;
+  right: auto; }
 
 .formulare .bob.bigB.over {
-    left: 76px;
-    right: auto;
-}
+  left: 76px;
+  right: auto; }
 
 .formulare .bigK {
-    top: 333px;
-}
+  top: 333px; }
