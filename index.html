@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+
+    <title>Diffie-Hellmann for Everyone</title>
+
+    <!-- Required stylesheet -->
+    <link rel="stylesheet" media="screen" href="deck.js/core/deck.core.css">
+    <link rel="stylesheet" media="screen" href="deck.js/extensions/style-chunks/core.css">
+
+    <!-- Extension CSS files go here. Remove or add as needed. -->
+    <link rel="stylesheet" media="screen" href="deck.js/extensions/menu/deck.menu.css">
+    <link rel="stylesheet" media="screen" href="deck.js/extensions/navigation/deck.navigation.css">
+    <link rel="stylesheet" media="screen" href="deck.js/extensions/status/deck.status.css">
+    <link rel="stylesheet" media="screen" href="deck.js/extensions/scale/deck.scale.css">
+
+    <!-- Style theme. More available in /themes/style/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="deck.js/themes/style/swiss.css">
+
+    <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+    <link rel="stylesheet" media="screen" href="deck.js/themes/transition/horizontal-slide.css">
+
+    <!-- Basic black and white print styles -->
+    <link rel="stylesheet" media="print" href="deck.js/core/print.css">
+
+    <link rel="stylesheet" media="screen" href="resources/css/main.css">
+    <link rel="stylesheet" media="screen" href="resources/css/kommutativ.css">
+    <link rel="stylesheet" media="screen" href="resources/css/modulo.css">
+    <link rel="stylesheet" media="screen" href="resources/css/formular.css">
+    <link rel="stylesheet" media="screen" href="resources/css/britnex.css">
+
+    <link rel="stylesheet" type="text/css" href="resources/css/jsxgraph.css"/>
+    <script type="text/javascript" src="resources/js/jsxgraphcore.js"></script>
+
+    <!-- Required Modernizr file -->
+    <script src="deck.js/modernizr.custom.js"></script>
+</head>
+<body>
+<div class="deck-container">
+
+    <div class="deck-loading-splash" style="background: green; font-size: 30px; font-family: Arial;">
+        Securing The Cyber...
+    </div>
+
+    <section class="slide">
+        <h1>Das "S" in HTTPS</h1>
+    </section>
+
+    <section class="slide intro">
+        <canvas class="content"></canvas>
+        <aside style="display: none">
+            <ul>
+                <li>Wenn ich im Internet etwas</li>
+                <li>bei ebay oder sonstwo bestelle, muss ich</li>
+                <li>vielleicht eine PIN oder Kreditkartennummer an ebay senden.</li>
+                <li>Weil ich das Internet benutze, kommt das HTTP-Protokoll zum Einsatz</li>
+                <li>und weil das das Internet ist, liegen zwischen mir und ebay</li>
+                <li>einige andere server</li>
+                <li>und weil HTTP alles im Plaintext verschickt,
+                    kann an diesen zwischenliegenden Servern jeder (z.B. auch ein Hacker)
+                </li>
+                <li>mitlesen, was so über die Leitung geht. Das ist unschön.</li>
+
+                <li>Wenn das hier 1970 wäre und ich James Bond wäre</li>
+                <li>und meine Position an M. schicken will, damit der weiß,
+                    wo die geheime Basis von Dr. No ist
+                </li>
+                <li>der natürlich die Telefonleitung abhört,
+                    dann möchte ich verhindern, dass er ebenfalls meine Position kennt.
+                    Ähnlich wie eine PIN ist das also eine schützenswerte Information.
+                </li>
+                <li>Weil ich im Auftrag der Queen unterwegs bin, haben wir natürlich vorher
+                    ein Codebuch ausgetauscht, in dem z.B. für jeden Tag ein
+                    Verschlüsselungscode steht.
+                </li>
+                <li>Ich suche mir also den Schlüssel für heute heraus und addiere ihn zu meiner
+                    schützenswerten Information
+                </li>
+                <li>so</li>
+                <li>Wenn ich das jetzt an M. schicke</li>
+                <li>bekommt Dr. No nur Zahlenwust</li>
+                <li>während M. aus dem Codebuch einfach ebenfalls den Schlüssel für heute heraussucht</li>
+                <li>und ihn von meiner Nachricht abzieht und so an die ursprüngliche Nachricht kommt.</li>
+
+
+                <li>Aber ich bin nicht James Bond</li>
+                <li>und ebay käme nie auf die Idee, mit mir und allen anderen Kunden ein Codebuch auszutauschen.</li>
+                <li>Wie können ebay und ich uns trotzdem auf einen Schlüssel einigen, mit dem wir
+                    ausgetauschte Nachrichten schützen können?
+                </li>
+            </ul>
+        </aside>
+    </section>
+
+    <section class="slide">
+        <h2>Ausgangs-Situation</h2>
+        <ul>
+            <li>Der gemeinsame Schlüssel darf nicht über die Leitung gehen <span class="idee__plain">weil HTTP ein Plaintext-Protokoll ist</span>
+            </li>
+            <div class="anim-show slide" data-what=".idee__plain"></div>
+            <li class="slide">es reicht, wenn ebay und ich uns auf den gleichen Schlüssel einigen</li>
+            <li class="slide">auch wenn wir auf verschiedenen Wegen zum selben Ziel kommen</li>
+            <li class="slide">Das Ziel ist ein sicherer Kanal, nicht die Authentifizierung von ebay oder mir - dazu
+                werden
+                Zertifikate benutzt
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Grundidee von Diffie und Hellmann</h2>
+        <blockquote cite="http://example.org">
+            <p>Wir benutzen einfach eine Funktion, die zwei Sachen kann:</p>
+            <ol>
+                <li class="slide">In die eine Richtung ist sie einfach, in die andere Richtung sehr, sehr schwer
+                    (Einweg-Funktion)
+                </li>
+                <li class="slide">Wer von uns sie zuerst ausführt ist egal, solange beide sie ausführen (kommutativ)
+                </li>
+            </ol>
+            <p><cite>Diffie und Hellmann 1976 (nicht bestätigt :)</cite></p>
+        </blockquote>
+    </section>
+
+    <section class="slide">
+        <h1>$$f(x) = g^a\:mod\:p$$</h1>
+    </section>
+
+    <section class="slide">
+        <h2>Einwegfunktion: Potenzrechnung mit Modulo</h2>
+        <h3>Modulo: Teilen mit Rest</h3>
+        <div class="slide">$$4\:mod\:3 = 1$$</div>
+        <div class="slide">$$5\:mod\:3 = 2$$</div>
+        <div class="slide">$$6\:mod\:3 = 0$$</div>
+        <div class="slide">$$7\:mod\:3 = 1$$</div>
+        <div class="slide">$$8\:mod\:3 = 2$$</div>
+    </section>
+
+    <section class="slide">
+        <h2>Einwegfunktion: Potenzrechnung mit Modulo</h2>
+        <h3>Modulo: Teilen mit Rest</h3>
+
+        <div class="modulo_11">
+            <div class="centered">$\mathbb Z_{/ 11}$</div>
+
+            <div class="mod deg0">2</div>
+            <div class="mod deg32">3</div>
+            <div class="mod deg64">4</div>
+            <div class="mod deg96">5</div>
+            <div class="mod deg128">6</div>
+            <div class="mod deg160">7</div>
+            <div class="mod deg192">8</div>
+            <div class="mod deg224">9</div>
+            <div class="mod deg256">10</div>
+            <div class="mod deg288">0</div>
+            <div class="mod deg320">1</div>
+        </div>
+
+        <div class="anim-addclass slide" data-what=".deg160" data-class="highlight"></div>
+        <div class="anim-removeclass slide anim-continue" data-what=".deg160" data-class="highlight"></div>
+
+        <div class="anim-addclass slide" data-what=".deg192" data-class="highlight"></div>
+        <div class="anim-removeclass slide anim-continue" data-what=".deg192" data-class="highlight"></div>
+
+        <div class="anim-addclass slide" data-what=".deg224" data-class="highlight"></div>
+        <div class="anim-removeclass slide anim-continue" data-what=".deg224" data-class="highlight"></div>
+
+        <div class="anim-addclass slide" data-what=".deg256" data-class="highlight"></div>
+        <div class="anim-removeclass slide anim-continue" data-what=".deg256" data-class="highlight"></div>
+
+        <div class="anim-addclass slide" data-what=".deg288" data-class="highlight"></div>
+        <div class="anim-removeclass slide anim-continue" data-what=".deg288" data-class="highlight"></div>
+
+        <div class="anim-addclass slide" data-what=".deg320" data-class="highlight"></div>
+    </section>
+
+    <section class="slide exponential">
+        <canvas class="content"></canvas>
+    </section>
+
+    <section class="slide">
+        <h2>Potenzrechnung</h2>
+        <div class="slide">$$8^2\:=\:8\:*\:8$$</div>
+        <div class="slide">$$8^3\:=\:8\:*\:8\:*\:8$$</div>
+        <div class="slide">$$8^4\:=\:8\:*\:8\:*\:8\:*\:8$$</div>
+    </section>
+
+    <section class="slide kommutativ">
+        <h2>Kommutativ</h2>
+
+        <div class="slide">$$8^{2^4}\:=$$</div>
+        <div class="slide">$$8^2\:{\color{red}*}\:8^2\:{\color{red}*}\:8^2\:{\color{red}*}\:8^2\:=$$</div>
+        <div class="slide">$$8*8\:{\color{red}*}\:8*8\:{\color{red}*}\:8*8\:{\color{red}*}\:8*8\:=$$</div>
+        <div class="slide">$$8*8*8*8\:{\color{red}*}\:8*8*8*8\:=$$</div>
+        <div class="slide">$$8^4\:{\color{red}*}\:8^4\:=$$</div>
+        <div class="slide">$$8^{4^2}$$</div>
+    </section>
+
+    <section class="slide kommutativ">
+        <h2>Kommutativ</h2>
+        <h3 class="kommutativ_formula">$ 3^{\color{blue} 4\color{black}^{\color{green}5}}\color{black}$
+            <span class="kommutativ_2">$= 3^{\color{blue} 4\color{black}* \color{green}5}\color{black}$</span>
+            <span class="kommutativ_3">$==3^{\color{green}5\color{black}* \color{blue} 4}\color{black}$</span>
+            <span class="kommutativ_4">$= 3^{\color{green}5\color{black}^{\color{blue} 4}}\color{black}$</span>
+        </h3>
+        <div class="anim-show slide" data-what=".kommutativ_2"></div>
+        <div class="anim-show slide" data-what=".kommutativ_3"></div>
+        <div class="anim-show slide" data-what=".kommutativ_4"></div>
+
+        <div class="slide kommutativ_head">
+            <span class="left">ALICE (4)</span>
+            <span class="right">BOB (5)</span>
+        </div>
+
+        <div class="kommutativ_original">
+            <span class="alice left">$3^{\color{blue} 4}$</span>
+            <span class="bob right">$3^{\color{green}5}$</span>
+            <div class="anim-show slide" data-what=".alice"></div>
+            <div class="anim-show slide" data-what=".bob"></div>
+        </div>
+
+        <div class="kommutativ_double">
+            <span class="bob hidden right">$3^{\color{green} 5}$</span>
+            <span class="alice hidden left">$3^{\color{blue} 4}$</span>
+
+            <div class="anim-removeclass slide anim-continue" data-what=".kommutativ_double .alice" data-class="hidden"></div>
+            <div class="anim-removeclass slide anim-continue" data-what=".kommutativ_double .alice" data-class="left"></div>
+            <div class="anim-addclass slide anim-continue" data-what=".kommutativ_double .alice" data-class="right"></div>
+
+            <div class="anim-removeclass slide anim-continue" data-what=".kommutativ_double .bob"
+                 data-class="hidden"></div>
+            <div class="anim-removeclass slide anim-continue" data-what=".kommutativ_double .bob"
+                 data-class="right"></div>
+            <div class="anim-addclass slide anim-continue" data-what=".kommutativ_double .bob" data-class="left"></div>
+
+            <div class="anim-addclass slide" data-what=".kommutativ_double" data-class="down"></div>
+        </div>
+
+        <div class="kommutativ_final">
+            <span class="bob hidden left">$3^{\color{green}5\color{black}^{\color{blue} 4}}\color{black}$</span>
+            <span class="equals hidden center">$==$</span>
+            <span class="alice hidden right">$3^{\color{blue} 4\color{black}^{\color{green}5}}\color{black}$</span>
+
+            <div class="anim-addclass slide anim-continue" data-what=".kommutativ_double .alice"
+                 data-class="hidden"></div>
+            <div class="anim-addclass slide anim-continue" data-what=".kommutativ_double .bob"
+                 data-class="hidden"></div>
+            <div class="anim-removeclass slide anim-continue" data-what=".kommutativ_final .alice"
+                 data-class="hidden"></div>
+            <div class="anim-removeclass slide" data-what=".kommutativ_final .bob" data-class="hidden"></div>
+            <div class="anim-removeclass slide" data-what=".kommutativ_final .equals" data-class="hidden"></div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Taschenrechner</h2>
+        <p class="slide">Benutzt bitte nicht den Taschenrechner auf eurem Handy, der kann kein Modulo rechnen</p>
+        <p class="slide">Nein, auch nicht der auf dem IPhone!</p>
+        <p style="font-size: 150%;">www.britnex.de</p>
+        <p class="slide">Die ganze Formel in einem Stück eingeben</p>
+        <p class="slide calculate_this"><span>$42249 ^{17245}\:mod\:82713=$</span><span
+                class="result">${\color{red}\:64293}$</span></p>
+        <p class="calculate_this">
+            <img class="britnex number1 hidden" src="resources/img/britnex_4.png">
+            <img class="britnex number1 hidden" src="resources/img/britnex_2.png">
+            <img class="britnex number1 hidden" src="resources/img/britnex_2.png">
+            <img class="britnex number1 hidden" src="resources/img/britnex_4.png">
+            <img class="britnex number1 hidden" src="resources/img/britnex_9.png">
+            <img class="britnex pow hidden" src="resources/img/britnex_pow.png">
+            <img class="britnex number2 hidden" src="resources/img/britnex_1.png">
+            <img class="britnex number2 hidden" src="resources/img/britnex_7.png">
+            <img class="britnex number2 hidden" src="resources/img/britnex_2.png">
+            <img class="britnex number2 hidden" src="resources/img/britnex_4.png">
+            <img class="britnex number2 hidden" src="resources/img/britnex_5.png">
+            <img class="britnex modulo hidden" src="resources/img/britnex_mod.png">
+            <img class="britnex number3 hidden" src="resources/img/britnex_8.png">
+            <img class="britnex number3 hidden" src="resources/img/britnex_2.png">
+            <img class="britnex number3 hidden" src="resources/img/britnex_7.png">
+            <img class="britnex number3 hidden" src="resources/img/britnex_1.png">
+            <img class="britnex number3 hidden" src="resources/img/britnex_3.png">
+            <img class="britnex equals hidden" src="resources/img/britnex_equals.png">
+        </p>
+        <div class="anim-removeclass slide" data-what=".britnex.number1" data-class="hidden"></div>
+        <div class="anim-removeclass slide" data-what=".britnex.pow" data-class="hidden"></div>
+        <div class="anim-removeclass slide" data-what=".britnex.number2" data-class="hidden"></div>
+        <div class="anim-removeclass slide" data-what=".britnex.modulo" data-class="hidden"></div>
+        <div class="anim-removeclass slide" data-what=".britnex.number3" data-class="hidden"></div>
+        <div class="anim-removeclass slide" data-what=".britnex.equals" data-class="hidden"></div>
+
+        <div class="anim-show slide" data-what=".result"></div>
+    </section>
+
+    <section class="slide">
+        <h2>Und so funktioniert's</h2>
+        <div class="formulare">
+            <img class="form left" src="resources/img/DH-Form-small.png">
+            <img class="form right" src="resources/img/DH-Form-small.png">
+
+            <div class="alice g hidden">23914</div>
+            <div class="bob g hidden">23914</div>
+
+            <div class="alice p hidden">71929</div>
+            <div class="bob p hidden">71929</div>
+
+            <div class="alice a hidden">13442</div>
+            <div class="bob a hidden">74873</div>
+
+            <div class="dh_formula1 center hidden">$$g^{a}\:mod\:p$$</div>
+
+            <div class="alice bigA raw hidden">$23914^{13442}\:mod\:71929$</div>
+            <div class="alice bigA result hidden">65439</div>
+
+            <div class="bob bigA formular hidden">$g^{a}\:mod\:p$</div>
+            <div class="bob bigA raw hidden">$23914^{74873}\:mod\:71929$</div>
+            <div class="bob bigA result hidden">8305</div>
+
+            <div class="alice bigB hidden">65439</div>
+            <div class="bob bigB hidden">8305</div>
+
+            <div class="dh_formula2 center hidden">$$B^{a}\:mod\:p$$</div>
+
+            <div class="alice bigK raw hidden">$8305^{13442}\:mod\:71929$</div>
+            <div class="alice bigK result hidden">20999</div>
+
+            <div class="bob bigK raw hidden">$65439^{74873}\:mod\:71929$</div>
+            <div class="bob bigK result hidden">20999</div>
+
+
+            <!-- someone selects the public parameters g, p -->
+            <div class="anim-show slide" data-what=".primegroup"></div>
+
+            <!-- alice and bob enter the public parameters-->
+            <div class="anim-removeclass slide anim-continue" data-what=".alice.g" data-class="hidden"></div>
+            <div class="anim-removeclass slide anim-continue" data-what=".alice.p" data-class="hidden"></div>
+            <div class="anim-removeclass slide anim-continue" data-what=".bob.g" data-class="hidden"></div>
+            <div class="anim-removeclass slide" data-what=".bob.p" data-class="hidden"></div>
+
+            <!-- alice and bob choose their private keys-->
+            <div class="anim-removeclass slide" data-what=".alice.a" data-class="hidden"></div>
+            <div class="anim-removeclass slide" data-what=".bob.a" data-class="hidden"></div>
+
+            <!-- show basic formula in the center-->
+            <div class="anim-removeclass slide" data-what=".dh_formula1" data-class="hidden"></div>
+
+            <!-- alice calculates her public key -->
+            <div class="anim-removeclass slide" data-what=".alice.bigA.raw" data-class="hidden"></div>
+            <div class="anim-addclass slide anim-continue" data-what=".alice.bigA.raw" data-class="hidden"></div>
+            <div class="anim-removeclass slide" data-what=".alice.bigA.result" data-class="hidden"></div>
+
+            <!-- bob calculates his public key-->
+            <div class="anim-removeclass slide" data-what=".bob.bigA.raw" data-class="hidden"></div>
+            <div class="anim-addclass slide anim-continue" data-what=".bob.bigA.raw" data-class="hidden"></div>
+            <div class="anim-removeclass slide" data-what=".bob.bigA.result" data-class="hidden"></div>
+
+            <!-- alice passes her public key over to bob -->
+            <div class="anim-removeclass slide anim-continue" data-what=".alice.bigB" data-class="hidden"></div>
+            <div class="anim-addclass slide" data-what=".alice.bigB" data-class="over"></div>
+
+            <!-- bob passes his public key over to alice-->
+            <div class="anim-removeclass slide anim-continue" data-what=".bob.bigB" data-class="hidden"></div>
+            <div class="anim-addclass slide" data-what=".bob.bigB" data-class="over"></div>
+
+
+            <!-- show basic formula in the center-->
+            <div class="anim-removeclass slide" data-what=".dh_formula2" data-class="hidden"></div>
+
+            <!-- alice calculates the shared key-->
+            <div class="anim-removeclass slide" data-what=".alice.bigK.raw" data-class="hidden"></div>
+            <div class="anim-addclass slide anim-continue" data-what=".alice.bigK.raw" data-class="hidden"></div>
+            <div class="anim-removeclass slide" data-what=".alice.bigK.result" data-class="hidden"></div>
+
+            <!-- bob calculates the shared key-->
+            <div class="anim-removeclass slide" data-what=".bob.bigK.raw" data-class="hidden"></div>
+            <div class="anim-addclass slide anim-continue" data-what=".bob.bigK.raw" data-class="hidden"></div>
+            <div class="anim-removeclass slide" data-what=".bob.bigK.result" data-class="hidden"></div>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h1>Elliptische Kurven</h1>
+    </section>
+
+    <section class="slide elliptic2">
+        <div class="jxgbox content"></div>
+    </section>
+
+    <section class="slide">
+        <h1>Danke</h1>
+    </section>
+
+    <!-- End slides. -->
+
+    <!-- Begin extension snippets. Add or remove as needed. -->
+    <section>
+        <!-- deck.navigation snippet -->
+        <div aria-role="navigation">
+            <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+            <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+        </div>
+
+        <!-- deck.status snippet -->
+        <p class="deck-status" aria-role="status">
+            <span class="deck-status-current"></span>
+            /
+            <span class="deck-status-total"></span>
+        </p>
+
+        <!-- End extension snippets. -->
+    </section>
+</div>
+
+<!-- Required JS files. -->
+<script src="deck.js/jquery.min.js"></script>
+
+<!-- mathjax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {extensions: ["color.js"]},
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['\\[','\\]'], ['$$','$$']]}});
+
+
+
+
+
+
+
+
+
+
+</script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<script src="deck.js/core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="deck.js/extensions/menu/deck.menu.js"></script>
+<script src="deck.js/extensions/status/deck.status.js"></script>
+<script src="deck.js/extensions/navigation/deck.navigation.js"></script>
+<script src="deck.js/extensions/scale/deck.scale.js"></script>
+<script src="deck.js/extensions/step/deck.step.js"></script>
+<script src="deck.js/extensions/events/deck.events.js"></script>
+<script src="deck.js/extensions/anim/deck.anim.js"></script>
+
+<script src="resources/js/stepper.js"></script>
+<script src="resources/js/intro.js"></script>
+<script src="resources/js/exponential.js"></script>
+<script src="resources/js/elliptic2.js"></script>
+
+<script>
+
+    function createAnimationHandle(className, steppable) {
+        return function (event, from, to) {
+            var current = $.deck('getSlide', from);
+            var upComing = $.deck('getSlide', to);
+
+            var isSteppableComing = upComing.hasClass(className);
+            var isCurrentlySteppable = current.hasClass(className);
+            var isGoingRight = from < to;
+            var currentHasMoreSteps = steppable.hasMoreSteps();
+
+            if (isCurrentlySteppable && (!currentHasMoreSteps || !isGoingRight)) {
+                steppable.stop();
+            }
+            if (isCurrentlySteppable && isGoingRight && currentHasMoreSteps) {
+                event.preventDefault();
+                steppable.step();
+            }
+            if (isSteppableComing && (!currentHasMoreSteps || !isGoingRight)) {
+
+                var $content = upComing.find('.content')
+                        .attr('id', className)
+                        .width('100%')
+                        .prop({width: 700, height: 700})
+                        .css({width: 700, height: 700, margin: 'auto'})
+                        .trigger('resize.deckscale');
+
+                steppable.init($content[0]);
+            }
+        };
+    }
+
+    $(function () {
+        $.deck('.slide');
+
+        $(document).bind('deck.beforeChange', createAnimationHandle('intro', dh.intro));
+        $(document).bind('deck.beforeChange', createAnimationHandle('exponential', dh.exponential));
+        $(document).bind('deck.beforeChange', createAnimationHandle('elliptic2', dh.elliptic2));
+
+    });
+</script>
+</body>
+</html>
