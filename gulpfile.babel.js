@@ -1,63 +1,74 @@
-import gulp from 'gulp';
-import babel from 'gulp-babel';
-import gutil from 'gulp-util';
-import webpack from 'webpack';
-import webpackConfig from './webpack.config.babel';
-import WebpackDevServer from 'webpack-dev-server';
-import sass from 'gulp-sass';
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var fs = require('fs');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var babelify = require('babelify');
+var rimraf = require('rimraf');
+var source = require('vinyl-source-stream');
+var _ = require('lodash');
+var browserSync = require('browser-sync');
+var reload = browserSync.reload;
 
-gulp.task('default', ['webpack', 'styles']);
-gulp.task('watch', ['server', 'watchIt']);
+var config = {
+    jsEntryFile: './src/js/main.js',
+    outputDir: './resources/js/',
+    outputFile: 'app.js'
+};
 
-gulp.task('babel', () => {
-    return gulp.src('src/js/*.js')
-            .pipe(babel())
-            .pipe(gulp.dest('target'));
-});
-
-gulp.task('watchIt', function() {
-    gulp.watch(['src/**/*', 'index.html'], ['webpack', 'styles']);
-});
+gulp.task('default', ['build']);
 
 gulp.task('styles', function() {
     gulp.src('src/scss/main.scss')
             .pipe(sass().on('error', sass.logError))
-            .pipe(gulp.dest('./resources/css/'));
+            .pipe(gulp.dest('./resources/css/'))
+            .pipe(browserSync.stream());
 });
 
-gulp.task('webpack', ['babel'], function(callback) {
-    var myConfig = Object.create(webpackConfig);
-    myConfig.plugins = [
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin()
-    ];
+gulp.task('watch-styles', function () {
+    return gulp.watch('src/scss/**/*.scss', ['styles']);
+});
 
-    // run webpack
-    webpack(myConfig, function(err, stats) {
-        if (err) throw new gutil.PluginError('webpack', err);
-        gutil.log('[webpack]', stats.toString({
-            colors: true,
-            progress: true
-        }));
-        callback();
+// clean the output directory
+gulp.task('clean', function(cb){
+    rimraf(config.outputDir, cb);
+});
+
+var bundler;
+function getBundler() {
+    if (!bundler) {
+        bundler = watchify(browserify(config.jsEntryFile, _.extend({ debug: true }, watchify.args)));
+    }
+    return bundler;
+}
+
+function bundle() {
+    return getBundler()
+            .transform(babelify)
+            .bundle()
+            .on('error', function(err) { console.log('Error: ' + err.message); })
+            .pipe(source(config.outputFile))
+            .pipe(gulp.dest(config.outputDir))
+            .pipe(reload({ stream: true }));
+}
+
+gulp.task('build-persistent', ['clean', 'styles'], function() {
+    return bundle();
+});
+
+gulp.task('build', ['build-persistent'], function() {
+    process.exit(0);
+});
+
+gulp.task('watch', ['build-persistent', 'watch-styles'], function() {
+
+    browserSync({
+        server: {
+            baseDir: './'
+        }
     });
-});
 
-gulp.task('server', ['webpack'], function(callback) {
-    // modify some webpack config options
-    var myConfig = Object.create(webpackConfig);
-    myConfig.devtool = 'eval';
-    myConfig.debug = true;
-
-    // Start a webpack-dev-server
-    new WebpackDevServer(webpack(myConfig), {
-        publicPath: '/' + myConfig.output.publicPath,
-        stats: {
-            colors: true
-        },
-        hot: true
-    }).listen(8080, 'localhost', function(err) {
-        if(err) throw new gutil.PluginError('webpack-dev-server', err);
-        gutil.log('[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html');
+    getBundler().on('update', function() {
+        gulp.start('build-persistent')
     });
 });

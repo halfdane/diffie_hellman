@@ -29,7 +29,7 @@
     <link rel="stylesheet" media="screen" href="resources/css/main.css">
 
     <link rel="stylesheet" type="text/css" href="resources/css/jsxgraph.css"/>
-    <script type="text/javascript" src="resources/js/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="resources/lib/jsxgraphcore.js"></script>
 
     <!-- Required Modernizr file -->
     <script src="deck.js/modernizr.custom.js"></script>
@@ -379,6 +379,10 @@
         <h1>Elliptische Kurven</h1>
     </section>
 
+    <section class="slide exponential2">
+        <div class="jxgbox content"></div>
+    </section>
+
     <section class="slide elliptic2">
         <div class="jxgbox content"></div>
     </section>
@@ -431,7 +435,7 @@
 <script src="deck.js/extensions/events/deck.events.js"></script>
 <script src="deck.js/extensions/anim/deck.anim.js"></script>
 
-<script src="resources/js/main.bundle.js"></script>
+<script src="resources/js/app.js"></script>
 
 <script>
 
@@ -471,6 +475,7 @@
 
         $(document).bind('deck.beforeChange', createAnimationHandle('intro', dh.intro));
         $(document).bind('deck.beforeChange', createAnimationHandle('exponential', dh.exponential));
+        $(document).bind('deck.beforeChange', createAnimationHandle('exponential2', dh.exponential2));
         $(document).bind('deck.beforeChange', createAnimationHandle('elliptic2', dh.elliptic2));
 
     });

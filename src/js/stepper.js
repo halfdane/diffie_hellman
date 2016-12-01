@@ -1,15 +1,19 @@
 module.exports = function createStepper() {
     var running = false;
     var currentStep = 0;
-    var steps;
+    var steps, stopStep;
 
-    function use(theseSteps) {
+    function use(theseSteps, useThisStopStep) {
         steps = theseSteps;
         running = true;
+        stopStep = useThisStopStep;
     }
 
     function stop() {
         running = false;
+        if (!!stopStep) {
+            stopStep();
+        }
     }
 
     function hasMoreSteps() {
