@@ -10,7 +10,7 @@ gulp.task('default', ['webpack', 'styles']);
 gulp.task('watch', ['server', 'watchIt']);
 
 gulp.task('babel', () => {
-    return gulp.src('src/*.js')
+    return gulp.src('src/js/*.js')
             .pipe(babel())
             .pipe(gulp.dest('target'));
 });
