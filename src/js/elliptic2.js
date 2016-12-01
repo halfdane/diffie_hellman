@@ -1,5 +1,4 @@
-const stepper = require('./stepper.js');
-console.log('huh', stepper);
+const stepper = require('./stepper.js')();
 const strokewidth = 3;
 
 let a;
