@@ -29,7 +29,7 @@
     padding: 11px;
     border-radius: 16px; }
   .formulare .dh_formula1 {
-    top: 6.6em; }
+    top: 9em; }
   .formulare .dh_formula2 {
     top: 14em; }
   .formulare .alice,
@@ -38,9 +38,10 @@
   .formulare .bob * {
     font-weight: bold;
     transition: all 1s ease-in-out;
-    transition-property: left, right, top; }
+    transition-property: left, right, top;
+    background-color: white; }
   .formulare .alice {
-    left: 76px; }
+    left: 157px; }
   .formulare .bob {
     right: 170px; }
   .formulare .bob.raw {
@@ -65,7 +66,7 @@
     left: 80%;
     right: auto; }
   .formulare .bob.bigB.over {
-    left: 76px;
+    left: 175px;
     right: auto; }
   .formulare .bigK {
     top: 423px; }

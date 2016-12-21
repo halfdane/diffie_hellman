@@ -65,7 +65,8 @@ gulp.task('watch', ['build-persistent', 'watch-styles'], function() {
     browserSync({
         server: {
             baseDir: './'
-        }
+        },
+        browser: ["google-chrome"]
     });
 
     getBundler().on('update', function() {

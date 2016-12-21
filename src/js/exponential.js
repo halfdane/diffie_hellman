@@ -1,310 +1,228 @@
-const createStepper = require('./stepper.js');
-module.exports = (function () {
+const stepper = require('./stepper.js')();
 
-    function createScaler (canvasWidth, canvasHeight, ctx) {
-        var iteration;
+function createScaler(canvasWidth, canvasHeight, ctx) {
+    let iteration;
 
-        var scaleX;
-        var scaleY;
+    let scaleX, scaleY;
+    let targetMaxX, targetMaxY;
+    let xStep, yStep;
+    let maxX = 5, maxY = 100000;
+    function draw(callback) {
+        ctx.save();
+        ctx.translate(0, canvasHeight);
+        ctx.scale(scaleX, -scaleY);
+        ctx.beginPath();
 
-        var maxX = 5, maxY = 100000;
+        callback(ctx, iteration, maxX, scaleX, scaleY);
 
-        var targetMaxX;
-        var targetMaxY;
-        var xStep, yStep;
+        ctx.restore();
 
-        function draw(callback) {
-            ctx.save();
-            ctx.translate(0, canvasHeight);
-            ctx.scale(scaleX, -scaleY);
-            ctx.beginPath();
-
-            callback(ctx, iteration, maxX, scaleX, scaleY);
-
-            ctx.restore();
-
-            ctx.lineJoin = 'round';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-        }
-
-        function zoomTo(newMaxX, newMaxY) {
-            targetMaxX = newMaxX;
-            targetMaxY = newMaxY;
-
-            xStep = (targetMaxX - maxX) / 100;
-            yStep = (targetMaxY - maxY) / 100;
-
-            zoomStep(maxX, maxY);
-        }
-
-        function set(newMaxX, newMaxY) {
-            maxX = newMaxX;
-            maxY = newMaxY;
-            iteration = newMaxX / 1000;
-
-            scaleX = canvasWidth / newMaxX;
-            scaleY = canvasHeight / newMaxY;
-        }
-
-        function zoomStep() {
-            var xDiff = Math.abs(targetMaxX - maxX);
-            var yDiff = Math.abs(targetMaxY - maxY);
-
-            if (xDiff > 0.1 || yDiff > 0.1) {
-                if (xDiff > 0.1) {
-                    maxX += xStep;
-                }
-                if (yDiff > 0.1) {
-                    maxY += yStep;
-                }
-                set(maxX, maxY);
-            }
-        }
-
-        return {
-            set: set,
-            draw: draw,
-            zoomTo: zoomTo,
-            zoomStep: zoomStep
-        };
+        ctx.lineJoin = 'round';
+        ctx.lineWidth = 2;
+        ctx.stroke();
     }
 
-    function createAxes(canvasWidth, canvasHeight, ctx) {
-        function draw() {
-            ctx.save();
-            ctx.translate(0, canvasHeight);
-            ctx.scale(1, -1);
+    function zoomTo(newMaxX, newMaxY) {
+        targetMaxX = newMaxX;
+        targetMaxY = newMaxY;
 
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(canvasWidth, 0);
-            ctx.strokeStyle = '#aaa';
-            ctx.lineWidth = 2;
-            ctx.stroke();
+        xStep = (targetMaxX - maxX) / 100;
+        yStep = (targetMaxY - maxY) / 100;
 
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(0, canvasHeight);
-            ctx.strokeStyle = '#aaa';
-            ctx.lineWidth = 2;
-            ctx.stroke();
+        zoomStep(maxX, maxY);
+    }
 
-            ctx.restore();
-        }
+    function set(newMaxX, newMaxY) {
+        maxX = newMaxX;
+        maxY = newMaxY;
+        iteration = newMaxX / 1000;
 
-        return {
-            draw: draw
+        scaleX = canvasWidth / newMaxX;
+        scaleY = canvasHeight / newMaxY;
+    }
+
+    function zoomStep() {
+        const xDiff = Math.abs(targetMaxX - maxX);
+        const yDiff = Math.abs(targetMaxY - maxY);
+
+        if (xDiff > 0.1 || yDiff > 0.1) {
+            if (xDiff > 0.1) {
+                maxX += xStep;
+            }
+            if (yDiff > 0.1) {
+                maxY += yStep;
+            }
+            set(maxX, maxY);
         }
     }
 
-    function createEquation(scaled) {
-        var equationFunction;
+    return {
+        set,
+        draw,
+        zoomTo,
+        zoomStep
+    };
+}
 
-        function set(newEquationFunction) {
-            equationFunction = newEquationFunction;
-        }
+function createAxes(canvasWidth, canvasHeight, ctx) {
+    function draw() {
+        ctx.save();
+        ctx.translate(0, canvasHeight);
+        ctx.scale(1, -1);
 
-        function calculate(x) {
-            return equationFunction(x);
-        }
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(canvasWidth, 0);
+        ctx.strokeStyle = '#aaa';
+        ctx.lineWidth = 2;
+        ctx.stroke();
 
-        function draw() {
-            scaled.draw(function (ctx, iteration, maxX, scaleX, scaleY) {
-                for (var x = 0 + iteration; x <= maxX; x += iteration) {
-                    ctx.fillStyle = 'red';
-                    ctx.fillRect(x, equationFunction(x), 2 / scaleX, 2 / scaleY);
-                }
-            });
-        }
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(0, canvasHeight);
+        ctx.strokeStyle = '#aaa';
+        ctx.lineWidth = 2;
+        ctx.stroke();
 
-        return {
-            set: set,
-            draw: draw,
-            calculate: calculate
-        }
+        ctx.restore();
     }
 
-    function createHighLight(scaled, equation) {
-        var animateHighlight;
-        var shouldDrawHighlight;
-        var currentHighlight;
-        var highlightEnd;
+    return {
+        draw
+    }
+}
 
-        function reset() {
-            animateHighlight = false;
-            shouldDrawHighlight = false;
-        }
+function createEquation(scaled) {
+    let equationFunction;
 
-        function activate(highlightStart) {
-            shouldDrawHighlight = true;
-            currentHighlight = highlightStart;
-        }
-
-        function animateTo(to) {
-            animateHighlight = true;
-            highlightEnd = to;
-        }
-
-        function draw() {
-            if (!shouldDrawHighlight) {
-                return;
-            }
-
-            scaled.draw(function (ctx, iteration) {
-                if (currentHighlight > highlightEnd) {
-                    if (animateHighlight) {
-                        currentHighlight -= iteration;
-                    }
-                }
-
-                var x = equation.calculate(currentHighlight);
-                
-                ctx.moveTo(currentHighlight, 0);
-                ctx.lineTo(currentHighlight, x);
-
-                ctx.moveTo(0, x);
-                ctx.lineTo(currentHighlight, x);
-                ctx.strokeStyle = 'blue';
-            });
-        }
-
-        return {
-            reset: reset,
-            activate: activate,
-            animateTo: animateTo,
-            draw: draw
-        }
+    function set(newEquationFunction) {
+        equationFunction = newEquationFunction;
     }
 
-    var steps = (function () {
+    function calculate(x) {
+        return equationFunction(x);
+    }
 
-        var running = false;
-        var highLight, scaled, equation;
-        var steps = [
-            function () {
-                equation.set(function (x) {
-                    return 17+x % 97;
-                });
-            },
-            function () {
-                equation.set(function (x) {
-                    return 17*x;
-                });
-            },
-            function () {
-                equation.set(function (x) {
-                    return 17*x % 97;
-                });
-            },
-            function () {
-                equation.set(function (x) {
-                    return Math.pow(17, x);
-                });
-            },
-            function () {
-                highLight.reset();
-                scaled.zoomTo(5, 100000);
-            },
-            function () {
-                highLight.activate(4);
-            },
-            function () {
-                highLight.animateTo(3)
-            },
-            function () {
-                highLight.reset();
-                scaled.zoomTo(100, 100);
-            },
-            function () {
-                equation.set(function (x) {
-                    return Math.pow(17, x) % 97;
-                });
-            },
-            function () {
-                highLight.activate(50);
-            },
-            function () {
-                highLight.animateTo(30)
+    function draw() {
+        scaled.draw(function (ctx, iteration, maxX, scaleX, scaleY) {
+            for (var x = 0 + iteration; x <= maxX; x += iteration) {
+                ctx.fillStyle = 'blue';
+                ctx.fillRect(x, equationFunction(x), 4 / scaleX, 4 / scaleY);
             }
-        ];
-        var currentStep = 0;
+        });
+    }
 
-        function init(newHighLight, newScaled, newEquation) {
-            running = true;
-            currentStep = 0;
+    return {
+        set,
+        draw,
+        calculate
+    }
+}
 
-            highLight = newHighLight;
-            scaled = newScaled;
-            equation = newEquation;
+function createHighLight(scaled, equation) {
+    let animateHighlight;
+    let shouldDrawHighlight;
+    let currentHighlight;
+    let highlightEnd;
+
+    function reset() {
+        animateHighlight = false;
+        shouldDrawHighlight = false;
+    }
+
+    function activate(highlightStart) {
+        shouldDrawHighlight = true;
+        currentHighlight = highlightStart;
+    }
+
+    function animateTo(to) {
+        animateHighlight = true;
+        highlightEnd = to;
+    }
+
+    function draw() {
+        if (!shouldDrawHighlight) {
+            return;
         }
 
-        function stop() {
-            running = false;
-        }
-
-        function hasMoreSteps() {
-            return running && currentStep < steps.length;
-        }
-
-        function step() {
-            steps[currentStep++]();
-        }
-
-        function isRunning() {
-            return running;
-        }
-
-        return {
-            init: init,
-            stop: stop,
-            hasMoreSteps: hasMoreSteps,
-            isRunning: isRunning,
-            step: step
-        }
-    })();
-
-    function init(canvas) {
-        var ctx = canvas.getContext('2d');
-
-        var scaled = createScaler(canvas.width, canvas.height, ctx);
-        scaled.set(500, 100);
-        scaled.zoomTo(500, 100);
-
-        var equation = createEquation(scaled);
-        equation.set(function (x) {
-                    return 17 + x;
-                });
-
-        var highLight = createHighLight(scaled, equation);
-        highLight.reset();
-
-        steps.init(highLight, scaled, equation);
-
-        var axes = createAxes(canvas.width, canvas.height, ctx);
-
-        function draw() {
-            if (!steps.isRunning()) {
-                return;
+        scaled.draw(function (ctx, iteration) {
+            if (currentHighlight > highlightEnd) {
+                if (animateHighlight) {
+                    currentHighlight -= iteration;
+                }
             }
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            axes.draw();
-            equation.draw();
-            highLight.draw();
-            scaled.zoomStep();
+            const x = equation.calculate(currentHighlight);
 
-            window.requestAnimationFrame(draw);
+            ctx.moveTo(currentHighlight, 0);
+            ctx.lineTo(currentHighlight, x);
+
+            ctx.moveTo(0, x);
+            ctx.lineTo(currentHighlight, x);
+            ctx.strokeStyle = 'blue';
+        });
+    }
+
+    return {
+        reset,
+        activate,
+        animateTo,
+        draw
+    }
+}
+
+function init(canvas) {
+    const ctx = canvas.getContext('2d');
+    const scaled = createScaler(canvas.width, canvas.height, ctx);
+    const equation = createEquation(scaled);
+    const highLight = createHighLight(scaled, equation);
+
+    scaled.set(500, 100);
+    scaled.zoomTo(500, 100);
+    highLight.reset();
+    equation.set(x => 17 + x);
+    stepper.use([
+        () => equation.set(x => 17 + x % 97),
+        () => equation.set(x => 17 * x),
+        () => equation.set(x => 17 * x % 97),
+        () => equation.set(x => Math.pow(17, x)),
+        () => {
+            highLight.reset();
+            scaled.zoomTo(5, 100000);
+        },
+        () => highLight.activate(4),
+        () => highLight.animateTo(3),
+        () => {
+            highLight.reset();
+            scaled.zoomTo(100, 100);
+        },
+        () => equation.set(x => Math.pow(17, x) % 97),
+        () => highLight.activate(50),
+        () => highLight.animateTo(30)
+    ]);
+
+    const axes = createAxes(canvas.width, canvas.height, ctx);
+
+    function draw() {
+        if (!stepper.isRunning()) {
+            return;
         }
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        axes.draw();
+        equation.draw();
+        highLight.draw();
+        scaled.zoomStep();
 
         window.requestAnimationFrame(draw);
     }
 
-    return {
-        init: init,
-        hasMoreSteps: steps.hasMoreSteps,
-        step: steps.step,
-        stop: steps.stop
-    };
-})();
-  
+    window.requestAnimationFrame(draw);
+}
+
+module.exports = {
+    init: init,
+    hasMoreSteps: stepper.hasMoreSteps,
+    step: stepper.step,
+    stop: stepper.stop
+};

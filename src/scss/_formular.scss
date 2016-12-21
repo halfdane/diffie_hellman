@@ -33,7 +33,7 @@
     }
 
     .dh_formula1 {
-        top: 6.6em;
+        top: 9em;
     }
 
     .dh_formula2 {
@@ -47,10 +47,11 @@
         font-weight: bold;
         transition: all 1s ease-in-out;
         transition-property: left, right, top;
+        background-color: white;
     }
 
     .alice {
-        left: 76px;
+        left: 157px;
     }
 
     .bob {
@@ -97,7 +98,7 @@
     }
 
     .bob.bigB.over {
-        left: 76px;
+        left: 175px;
         right: auto;
     }
 

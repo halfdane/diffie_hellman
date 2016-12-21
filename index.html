@@ -178,6 +178,10 @@
     </section>
 
     <section class="slide">
+        <h1>$$f(x) = g^a\:mod\:p$$</h1>
+    </section>
+
+    <section class="slide">
         <h2>Potenzrechnung</h2>
         <div class="slide">$$8^2\:=\:8\:*\:8$$</div>
         <div class="slide">$$8^3\:=\:8\:*\:8\:*\:8$$</div>
@@ -251,6 +255,10 @@
         </div>
     </section>
 
+    <section class="slide">
+        <h1>$$f(x) = g^a\:mod\:p$$</h1>
+    </section>
+
     <section class="slide theCalculator">
         <h2>Taschenrechner</h2>
         <p class="slide">Benutzt bitte nicht den Taschenrechner auf eurem Handy, der kann kein Modulo rechnen</p>
@@ -292,6 +300,8 @@
     <section class="slide">
         <h2>Und so funktioniert's</h2>
         <div class="formulare">
+            <div class="primegroup center">g=23914<br>p=71929</div>
+
             <img class="form left" src="resources/img/DH-Form.png">
             <img class="form right" src="resources/img/DH-Form.png">
 
@@ -377,10 +387,6 @@
 
     <section class="slide">
         <h1>Elliptische Kurven</h1>
-    </section>
-
-    <section class="slide exponential2">
-        <div class="jxgbox content"></div>
     </section>
 
     <section class="slide elliptic2">
@@ -475,7 +481,6 @@
 
         $(document).bind('deck.beforeChange', createAnimationHandle('intro', dh.intro));
         $(document).bind('deck.beforeChange', createAnimationHandle('exponential', dh.exponential));
-        $(document).bind('deck.beforeChange', createAnimationHandle('exponential2', dh.exponential2));
         $(document).bind('deck.beforeChange', createAnimationHandle('elliptic2', dh.elliptic2));
 
     });
