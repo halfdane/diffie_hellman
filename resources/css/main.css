@@ -22,6 +22,8 @@
     right: 0; }
   .formulare .center {
     left: 44%; }
+  .formulare .form {
+    width: 400px; }
   .formulare .primegroup {
     border: medium solid blue;
     padding: 11px;
@@ -29,7 +31,7 @@
   .formulare .dh_formula1 {
     top: 6.6em; }
   .formulare .dh_formula2 {
-    top: 11em; }
+    top: 14em; }
   .formulare .alice,
   .formulare .bob,
   .formulare .alice *,
@@ -44,15 +46,15 @@
   .formulare .bob.raw {
     right: 335px; }
   .formulare .g {
-    top: 34px; }
+    top: 52px; }
   .formulare .p {
-    top: 92px; }
+    top: 123px; }
   .formulare .a {
-    top: 150px; }
+    top: 198px; }
   .formulare .bigA, .formulare .bigB {
-    top: 213px; }
+    top: 274px; }
   .formulare .bigB.over {
-    top: 270px; }
+    top: 345px; }
   .formulare .alice.bigB {
     right: 80%;
     left: auto; }
@@ -66,7 +68,7 @@
     left: 76px;
     right: auto; }
   .formulare .bigK {
-    top: 333px; }
+    top: 423px; }
 
 .kommutativ_formula {
   text-align: center; }

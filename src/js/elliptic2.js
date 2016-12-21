@@ -13,6 +13,8 @@ function inverseF(x) {
 }
 
 function init(target) {
+    target.style.height="700px";
+    target.style.width="700px";
     const board = JXG.JSXGraph.initBoard(target.id, {
         boundingbox: [-5, 5, 5, -5],
         axis: true,

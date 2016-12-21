@@ -2,13 +2,24 @@ const createStepper = require('./stepper.js');
 
 module.exports =  (function () {
 
-    var maxWidth = 500,
-            maxHeight = 500;
-    var actorWidth = 100;
+    var maxWidth, maxHeight, actorWidth;
+    var halfWidth, halfHeight, halfActorWidth;
 
-    var halfWidth = maxWidth / 2;
-    var halfHeight = maxHeight / 2;
-    var halfActorWidth = actorWidth / 2;
+    var actorY, intruderY, messageY;
+
+    function setSizes(canvas) {
+        maxWidth = canvas.width;
+        maxHeight = canvas.height;
+        actorWidth = 100;
+
+        halfWidth = maxWidth / 2;
+        halfHeight = maxHeight / 2;
+        halfActorWidth = actorWidth / 2;
+
+        actorY = halfHeight-actorWidth;
+        intruderY = maxHeight-2*actorWidth;
+        messageY = actorY-5;
+    }
 
     function makeActivatable(something) {
         var active = false;
@@ -107,7 +118,6 @@ module.exports =  (function () {
         }
 
         function calcStep() {
-            console.log('Adjusting', str);
             xStep = (targetX - x + xOffset) / maxWidth;
             if (targetX > x + xOffset) {
                 moveX = function (x) {
@@ -142,7 +152,7 @@ module.exports =  (function () {
         }
 
         function moveDown() {
-            targetY = 440;
+            targetY = intruderY-20;
             calcStep();
         }
 
@@ -203,11 +213,11 @@ module.exports =  (function () {
         return makeActivatable({draw: draw});
     };
 
-    var createProtocolListener = function (ctx, y) {
+    var createProtocolListener = function (ctx, y1, y2) {
         function draw() {
             ctx.beginPath();
-            ctx.moveTo(halfWidth, y);
-            ctx.lineTo(halfWidth, y + 100);
+            ctx.moveTo(halfWidth, y1);
+            ctx.lineTo(halfWidth, y2);
             ctx.stroke();
         }
 
@@ -284,7 +294,7 @@ module.exports =  (function () {
                     messageCopy.moveDown();
                 },
                 function () {
-                    message.setStart(200);
+                    message.setStart(maxWidth - 3*actorWidth);
                     message.setMessage((7626 + 60811) + '- 60811');
                 },
                 function () {
@@ -339,20 +349,22 @@ module.exports =  (function () {
     function init(canvas) {
         var ctx = canvas.getContext('2d');
 
+        setSizes(canvas);
+
         createImages(function (images) {
-            var client = createActor(ctx, 0, 200, images.client, images.jb);
+            var client = createActor(ctx, 0, actorY, images.client, images.jb);
             client.activate();
-            var server = createActor(ctx, maxWidth - actorWidth, 200, images.shop, images.m);
-            var intruder = createActor(ctx, halfWidth - halfActorWidth, 300, images.hacker, images.no);
+            var server = createActor(ctx, maxWidth - actorWidth, actorY, images.shop, images.m);
+            var intruder = createActor(ctx, halfWidth - halfActorWidth, intruderY, images.hacker, images.no);
             var codebook1 = createActor(ctx, 0, 40, images.codebook);
             var codebook2 = createActor(ctx, maxWidth - actorWidth, 40, images.codebook);
-            var message = createMessage(ctx, 0, 180, 'orig');
+            var message = createMessage(ctx, 0, messageY, 'orig');
 
-            var messageCopy = createMessage(ctx, halfWidth - halfActorWidth, 180, 'copy');
+            var messageCopy = createMessage(ctx, halfWidth - halfActorWidth, messageY, 'copy');
 
-            var protocol = createProtocol(ctx, 185);
-            var protocolDots = createProtocolDots(ctx, 185);
-            var protocolListener = createProtocolListener(ctx, 185);
+            var protocol = createProtocol(ctx, actorY);
+            var protocolDots = createProtocolDots(ctx, actorY);
+            var protocolListener = createProtocolListener(ctx, actorY, intruderY);
 
             steps.init(client, server, intruder, message, messageCopy, protocol,
                     protocolDots, protocolListener,

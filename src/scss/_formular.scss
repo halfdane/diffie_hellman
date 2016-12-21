@@ -22,6 +22,10 @@
         left: 44%;
     }
 
+    .form {
+        width: 400px;
+    }
+
     .primegroup {
         border: medium solid blue;
         padding: 11px;
@@ -33,7 +37,7 @@
     }
 
     .dh_formula2 {
-        top: 11em;
+        top: 14em;
     }
 
     .alice,
@@ -58,23 +62,23 @@
     }
 
     .g {
-        top: 34px;
+        top: 52px;
     }
 
     .p {
-        top: 92px;
+        top: 123px;
     }
 
     .a {
-        top: 150px;
+        top: 198px;
     }
 
     .bigA, .bigB {
-        top: 213px;
+        top: 274px;
     }
 
     .bigB.over {
-        top: 270px;
+        top: 345px;
     }
 
     .alice.bigB {
@@ -98,6 +102,6 @@
     }
 
     .bigK {
-        top: 333px;
+        top: 423px;
     }
 }
