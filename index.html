@@ -43,52 +43,11 @@
 
     <section class="slide">
         <h1>Das "S" in HTTPS</h1>
+        <a href="resources/img/DH-Form.odt">(Die Formulare)</a>
     </section>
 
     <section class="slide intro">
         <canvas class="content"></canvas>
-        <aside style="display: none">
-            <ul>
-                <li>Wenn ich im Internet etwas</li>
-                <li>bei ebay oder sonstwo bestelle, muss ich</li>
-                <li>vielleicht eine PIN oder Kreditkartennummer an ebay senden.</li>
-                <li>Weil ich das Internet benutze, kommt das HTTP-Protokoll zum Einsatz</li>
-                <li>und weil das das Internet ist, liegen zwischen mir und ebay</li>
-                <li>einige andere server</li>
-                <li>und weil HTTP alles im Plaintext verschickt,
-                    kann an diesen zwischenliegenden Servern jeder (z.B. auch ein Hacker)
-                </li>
-                <li>mitlesen, was so über die Leitung geht. Das ist unschön.</li>
-
-                <li>Wenn das hier 1970 wäre und ich James Bond wäre</li>
-                <li>und meine Position an M. schicken will, damit der weiß,
-                    wo die geheime Basis von Dr. No ist
-                </li>
-                <li>der natürlich die Telefonleitung abhört,
-                    dann möchte ich verhindern, dass er ebenfalls meine Position kennt.
-                    Ähnlich wie eine PIN ist das also eine schützenswerte Information.
-                </li>
-                <li>Weil ich im Auftrag der Queen unterwegs bin, haben wir natürlich vorher
-                    ein Codebuch ausgetauscht, in dem z.B. für jeden Tag ein
-                    Verschlüsselungscode steht.
-                </li>
-                <li>Ich suche mir also den Schlüssel für heute heraus und addiere ihn zu meiner
-                    schützenswerten Information
-                </li>
-                <li>so</li>
-                <li>Wenn ich das jetzt an M. schicke</li>
-                <li>bekommt Dr. No nur Zahlenwust</li>
-                <li>während M. aus dem Codebuch einfach ebenfalls den Schlüssel für heute heraussucht</li>
-                <li>und ihn von meiner Nachricht abzieht und so an die ursprüngliche Nachricht kommt.</li>
-
-
-                <li>Aber ich bin nicht James Bond</li>
-                <li>und ebay käme nie auf die Idee, mit mir und allen anderen Kunden ein Codebuch auszutauschen.</li>
-                <li>Wie können ebay und ich uns trotzdem auf einen Schlüssel einigen, mit dem wir
-                    ausgetauschte Nachrichten schützen können?
-                </li>
-            </ul>
-        </aside>
     </section>
 
     <section class="slide">
@@ -107,7 +66,7 @@
     </section>
 
     <section class="slide">
-        <h2>Grundidee von Diffie und Hellmann</h2>
+        <h2>Grundidee von Diffie-Hellmann</h2>
         <blockquote cite="http://example.org">
             <p>Wir benutzen einfach eine Funktion, die zwei Sachen kann:</p>
             <ol>
@@ -117,7 +76,7 @@
                 <li class="slide">Wer von uns sie zuerst ausführt ist egal, solange beide sie ausführen (kommutativ)
                 </li>
             </ol>
-            <p><cite>Diffie und Hellmann 1976 (nicht bestätigt :)</cite></p>
+            <p><cite>Whitfield Diffie und Martin Hellmann 1976</cite></p>
         </blockquote>
     </section>
 
