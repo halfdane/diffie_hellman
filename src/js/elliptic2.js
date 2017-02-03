@@ -13,6 +13,7 @@ function inverseF(x) {
 }
 
 function init(target) {
+    JXG.Options.text.useMathJax = true;
     target.style.height="700px";
     target.style.width="700px";
     const board = JXG.JSXGraph.initBoard(target.id, {
@@ -20,6 +21,11 @@ function init(target) {
         axis: true,
         showCopyright: false
     });
+
+    board.create('text', [-4, 4,
+        function () {
+            return '\\[y^2 = x^3 + ax + b\\]';
+        }], {fontSize: 24});
 
     a = board.create('slider', [[0, -3], [4, -3], [-5, -3, 5]]);
     b = board.create('slider', [[0, -4], [4, -4], [-5, 3, 5]]);
