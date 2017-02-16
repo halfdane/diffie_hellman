@@ -7,6 +7,7 @@ function createScaler(canvasWidth, canvasHeight, ctx) {
     let targetMaxX, targetMaxY;
     let xStep, yStep;
     let maxX = 5, maxY = 100000;
+
     function draw(callback) {
         ctx.save();
         ctx.translate(0, canvasHeight);
@@ -92,11 +93,39 @@ function createAxes(canvasWidth, canvasHeight, ctx) {
     }
 }
 
-function createEquation(scaled) {
+function createEquationLabel(canvasWidth, canvasHeight, ctx) {
+    let equationLabel;
+
+    function set(newEquationLabel = 'hey baby;') {
+        equationLabel = newEquationLabel;
+    }
+
+    function draw() {
+        ctx.save();
+
+        ctx.fillStyle = 'black';
+        ctx.strokeStyle = 'black';
+        ctx.font = '60px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(equationLabel, canvasWidth / 2, canvasHeight / 2);
+        //ctx.strokeText(equationLabel, canvasWidth / 2, canvasHeight / 2);
+
+        ctx.restore();
+    }
+
+    return {
+        draw,
+        set
+    }
+}
+
+function createEquation(scaled, label) {
     let equationFunction;
 
-    function set(newEquationFunction) {
+    function set(newEquationFunction, newLabelString = 'wut?') {
         equationFunction = newEquationFunction;
+        label.set(newLabelString);
     }
 
     function calculate(x) {
@@ -110,6 +139,7 @@ function createEquation(scaled) {
                 ctx.fillRect(x, equationFunction(x), 4 / scaleX, 4 / scaleY);
             }
         });
+        label.draw();
     }
 
     return {
@@ -174,18 +204,19 @@ function createHighLight(scaled, equation) {
 function init(canvas) {
     const ctx = canvas.getContext('2d');
     const scaled = createScaler(canvas.width, canvas.height, ctx);
-    const equation = createEquation(scaled);
+    const label = createEquationLabel(canvas.width, canvas.height, ctx);
+    const equation = createEquation(scaled, label);
     const highLight = createHighLight(scaled, equation);
 
     scaled.set(500, 100);
     scaled.zoomTo(500, 100);
     highLight.reset();
-    equation.set(x => 17 + x);
+    equation.set(x => 17 + x, 'f(x) = 17 + x');
     stepper.use([
-        () => equation.set(x => 17 + x % 97),
-        () => equation.set(x => 17 * x),
-        () => equation.set(x => 17 * x % 97),
-        () => equation.set(x => Math.pow(17, x)),
+        () => equation.set(x => 17 + x % 97, 'f(x) = 17 + x mod 97'),
+        () => equation.set(x => 17 * x, 'f(x) = 17 * x'),
+        () => equation.set(x => 17 * x % 97, 'f(x) = 17 * x mod 97'),
+        () => equation.set(x => Math.pow(17, x), 'f(x) = 17 ^ x'),
         () => {
             highLight.reset();
             scaled.zoomTo(5, 100000);
@@ -196,7 +227,7 @@ function init(canvas) {
             highLight.reset();
             scaled.zoomTo(100, 100);
         },
-        () => equation.set(x => Math.pow(17, x) % 97),
+        () => equation.set(x => Math.pow(17, x) % 97, 'f(x) = 17 ^ x mod 97'),
         () => highLight.activate(50),
         () => highLight.animateTo(30)
     ]);
