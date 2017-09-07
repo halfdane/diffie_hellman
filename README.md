@@ -1,4 +1,4 @@
-# Das "S" in "HTTPS" – EIne freundliche Einführung in die Kryptographie
+# Das "S" in "HTTPS" – Eine freundliche Einführung in die Kryptographie
 ## Abstract
 Die Sicherheit unserer digitalen Kommunikation basiert auf mathematischen Konzepten, 
 die im Allgemeinen nicht besonders zugänglich dargestellt werden. 
