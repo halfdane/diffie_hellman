@@ -21,9 +21,10 @@ Ich bin zuversichtlich, dass für Techniker und Nicht-Techniker gleichermaßen n
 Um den Workshop vernünftig durchführen zu können brauchst du:
 
 - Die Präse: https://halfdane.github.io/diffie_hellman/
+- Formel Berechnen: https://halfdane.github.io/diffie_hellman/calc.html
 - Formulare für den Workshop zum Ausdrucken: https://halfdane.github.io/diffie_hellman/resources/img/DH-Form.odt
 - 10 bis 20 W10
 - kleine Zettel, die als Plaintext-Protokoll benutzt werden können
 - Stifte, um die verschlüsselten Nachrichten aufs Plaintext-Protokoll zu schreiben
 
-Die Teilnehmer müssen während des Workshops auf den Taschenrechner bei www.britnex.de zugreifen, Internet-Zugang ist also nötig.
+Die Teilnehmer müssen während des Workshops auf den Taschenrechner bei https://halfdane.github.io/diffie_hellman/calc.html zugreifen, Internet-Zugang ist also nötig.
