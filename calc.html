@@ -22,9 +22,9 @@
 
 <script>
     function reactToInput() {
-        const g = BigInt(document.getElementById('g_input').value || 1);
-        const a = BigInt(document.getElementById('a_input').value || 1);
-        const p = BigInt(document.getElementById('p_input').value || 1);
+        var g = BigInt(document.getElementById('g_input').value || 1);
+        var a = BigInt(document.getElementById('a_input').value || 1);
+        var p = BigInt(document.getElementById('p_input').value || 1);
 
         document.getElementById('result').textContent = g ** a % p;
     }
