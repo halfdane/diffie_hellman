@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+
+    <title>Diffie-Hellman Formel berechnen</title>
+
+</head>
+<body style="text-align: center;font-size: 3em">
+
+<h1>Diffie-Hellman Formel berechnen</h1>
+    <div>
+        <form>
+            g<input type="number" class="js_number" id="g_input">
+            <sup>a <input type="number" class="js_number" id="a_input"></sup>
+            mod p<input type="number" class="js_number" id="p_input">
+            = <span id="result"></span>
+        </form>
+    </div>
+
+<script>
+    function reactToInput() {
+        const g = BigInt(document.getElementById('g_input').value || 1);
+        const a = BigInt(document.getElementById('a_input').value || 1);
+        const p = BigInt(document.getElementById('p_input').value || 1);
+
+        document.getElementById('result').textContent = g ** a % p;
+    }
+
+    document.body.addEventListener('input', reactToInput);
+    reactToInput();
+</script>
+
+
+</body>
+</html>
