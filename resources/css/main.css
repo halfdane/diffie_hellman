@@ -1,13 +1,7 @@
-.theCalculator .britnex {
-  height: 2em;
-  display: inline; }
-  .theCalculator .britnex.equals {
-    height: 3em; }
-  .theCalculator .britnex.hidden {
-    visibility: hidden; }
-
-.theCalculator .calculate_this {
+.theCalculator {
   text-align: center; }
+  .theCalculator .link {
+    font-size: 300%; }
 
 .formulare {
   position: relative;
