@@ -1,7 +1,12 @@
 .theCalculator {
   text-align: center; }
   .theCalculator .link {
-    font-size: 300%; }
+    font-size: 300%;
+    margin-bottom: 0.8em}
+  .theCalculator img {
+    height: 12em;}
+  .theCalculator .calculate_this {
+    font-size: 300%;}
 
 .formulare {
   position: relative;

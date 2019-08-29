@@ -20,11 +20,27 @@ Ich bin zuversichtlich, dass für Techniker und Nicht-Techniker gleichermaßen n
 ## Materialien
 Um den Workshop vernünftig durchführen zu können brauchst du:
 
-- Die Präse: https://halfdane.github.io/diffie_hellman/
-- Formel Berechnen: https://halfdane.github.io/diffie_hellman/calc.html
+- Die Präse: https://halfdane.github.io/diffie_hellman/ (https://tinyurl.com/y6hxpvnv)
+- Formel Berechnen: https://halfdane.github.io/diffie_hellman/calc.html (https://tinyurl.com/y4mua3o8)
 - Formulare für den Workshop zum Ausdrucken: https://halfdane.github.io/diffie_hellman/resources/img/DH-Form.odt
 - 10 bis 20 W10
 - kleine Zettel, die als Plaintext-Protokoll benutzt werden können
 - Stifte, um die verschlüsselten Nachrichten aufs Plaintext-Protokoll zu schreiben
 
 Die Teilnehmer müssen während des Workshops auf den Taschenrechner bei https://halfdane.github.io/diffie_hellman/calc.html zugreifen, Internet-Zugang ist also nötig.
+
+## Referenzen
+
+- Diese Präsentation
+  - https://halfdane.github.io/diffie_hellman/
+  - https://tinyurl.com/yyobmbo8
+- Github Repo
+  - https://github.com/halfdane/diffie_hellman
+  - https://tinyurl.com/y6hxpvnv
+- RFCs
+  - 2409: The Internet Key Exchange
+  - 3526: More Modular Exponential Diffie-Hellman groups
+- Mehr
+  - https://arstechnica.com/information-technology/2013/10/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
+  - https://www.golem.de/news/dsa-diffie-hellman-primzahlen-koennen-hintertuer-enthalten-1610-123778.html
+

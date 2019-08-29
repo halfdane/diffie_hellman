@@ -187,9 +187,12 @@
             <span class="bob hidden right">$3^{\color{green} 5}$</span>
             <span class="alice hidden left">$3^{\color{blue} 4}$</span>
 
-            <div class="anim-removeclass slide anim-continue" data-what=".kommutativ_double .alice" data-class="hidden"></div>
-            <div class="anim-removeclass slide anim-continue" data-what=".kommutativ_double .alice" data-class="left"></div>
-            <div class="anim-addclass slide anim-continue" data-what=".kommutativ_double .alice" data-class="right"></div>
+            <div class="anim-removeclass slide anim-continue" data-what=".kommutativ_double .alice"
+                 data-class="hidden"></div>
+            <div class="anim-removeclass slide anim-continue" data-what=".kommutativ_double .alice"
+                 data-class="left"></div>
+            <div class="anim-addclass slide anim-continue" data-what=".kommutativ_double .alice"
+                 data-class="right"></div>
 
             <div class="anim-removeclass slide anim-continue" data-what=".kommutativ_double .bob"
                  data-class="hidden"></div>
@@ -227,10 +230,13 @@
             <p class="slide">Nein, auch nicht der auf dem IPhone!</p>
 
             <p class="link">https://halfdane.github.io/diffie_hellman/calc.html</p>
+            <p class="link">https://tinyurl.com/y4mua3o8</p>
             <p><img src="resources/img/qrcode.png"/></p>
 
-            <p class="slide calculate_this"><span>$42249 ^{17245}\:mod\:82713=$</span><span
-                    class="result">${\color{red}\:64293}$</span></p>
+            <p class="slide calculate_this">
+                <span>$42249 ^{17245}\:mod\:82713=$</span>
+                <span class="result">${\color{red}\:64293}$</span>
+            </p>
 
             <div class="anim-show slide" data-what=".result"></div>
         </div>
@@ -336,6 +342,41 @@
         <h1>Danke</h1>
     </section>
 
+    <section class="slide">
+        <h1>Fragen?</h1>
+    </section>
+
+    <section class="slide">
+        <h2>Referenzen</h2>
+        <ul>
+            <li>Diese Präsentation
+                <ul>
+                    <li>https://halfdane.github.io/diffie_hellman/</li>
+                    <li>https://tinyurl.com/yyobmbo8</li>
+                </ul>
+            </li>
+            <li>Github Repo
+                <ul>
+                    <li>https://github.com/halfdane/diffie_hellman</li>
+                    <li>https://tinyurl.com/y6hxpvnv</li>
+                </ul>
+            </li>
+            <li>RFCs
+                <ul>
+                    <li>2409: The Internet Key Exchange</li>
+                    <li>3526: More Modular Exponential Diffie-Hellman groups</li>
+                </ul>
+            </li>
+            <li>Mehr
+                <ul>
+                    <li>https://arstechnica.com/information-technology/2013/10/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/</li>
+                    <li>https://www.golem.de/news/dsa-diffie-hellman-primzahlen-koennen-hintertuer-enthalten-1610-123778.html</li>
+                    <li></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
     <!-- End slides. -->
 
     <!-- Begin extension snippets. Add or remove as needed. -->
@@ -366,6 +407,7 @@
     TeX: {extensions: ["color.js"]},
     tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']],
     displayMath: [['\\[','\\]'], ['$$','$$']]}});
+
 </script>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -405,11 +447,11 @@
             if (isSteppableComing && (!currentHasMoreSteps || !isGoingRight)) {
 
                 var $content = upComing.find('.content')
-                        .attr('id', className)
-                        .width('100%')
-                        .prop({width: 700, height: 700})
-                        .css({width: "100%", height: "100%", margin: 'auto'})
-                        .trigger('resize.deckscale');
+                    .attr('id', className)
+                    .width('100%')
+                    .prop({width: 700, height: 700})
+                    .css({width: "100%", height: "100%", margin: 'auto'})
+                    .trigger('resize.deckscale');
 
                 steppable.init($content[0]);
             }
