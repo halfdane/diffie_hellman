@@ -50,15 +50,10 @@
     </section>
 <script>
     function reactToInput() {
-        alert('1');
         var g = bigInt(document.getElementById('g_input').value || 1);
-        alert('2');
         var a = bigInt(document.getElementById('a_input').value || 1);
-        alert('3');
         var p = bigInt(document.getElementById('p_input').value || 1);
-        alert('4');
-        document.getElementById('result').textContent = g ** a % p;
-        alert('5');
+        document.getElementById('result').textContent = g.modPow(a, p);
     }
 
     document.body.addEventListener('input', reactToInput);
