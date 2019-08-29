@@ -52,4 +52,6 @@ Die Teilnehmer müssen während des Workshops auf den Taschenrechner bei https:/
 <br/>Dieses
 Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative
 Commons Namensnennung 4.0 International Lizenz</a>.
+Zuschreibung bitte durch einen Link auf <a href="https://github.com/halfdane/diffie_hellman">https://github.com/halfdane/diffie_hellman</a>.
+
 
