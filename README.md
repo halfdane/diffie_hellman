@@ -45,16 +45,10 @@ Die Teilnehmer müssen während des Workshops auf den Taschenrechner bei https:/
   - https://www.golem.de/news/dsa-diffie-hellman-primzahlen-koennen-hintertuer-enthalten-1610-123778.html
 
 ## Lizenz
+
 [![Creative Commons Lizenzvertrag](https://i.creativecommons.org/l/by/4.0/88x31.png "Creative Commons Lizenzvertrag")
-](http://creativecommons.org/licenses/by/4.0/)(rel="license")
+](http://creativecommons.org/licenses/by/4.0/)
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-    <img alt="Creative Commons Lizenzvertrag"
-         style="border-width:0"
-         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>
-<br/>Dieses
-Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative
-Commons Namensnennung 4.0 International Lizenz</a>.
-Zuschreibung bitte durch einen Link auf <a href="https://github.com/halfdane/diffie_hellman">https://github.com/halfdane/diffie_hellman</a>.
-
+*"[Das "S" in "HTTPS" – Eine freundliche Einführung in die Kryptographie](https://github.com/halfdane/diffie_hellman)" 
+von [HalfDane](https://github.com/halfdane) steht unter einer [CC BY](https://creativecommons.org/licenses/by/4.0/) Lizenz*
 
