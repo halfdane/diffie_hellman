@@ -32,7 +32,7 @@ Die Teilnehmer müssen während des Workshops auf den Taschenrechner bei https:/
 ## Referenzen
 
 - Diese Präsentation
-  - https://halfdane.github.io/diffie_hellman/
+  - [https://halfdane.github.io/diffie_hellman](https://halfdane.github.io/diffie_hellman/)(rel="nofollow")
   - https://tinyurl.com/yyobmbo8
 - Github Repo
   - https://github.com/halfdane/diffie_hellman
@@ -45,6 +45,9 @@ Die Teilnehmer müssen während des Workshops auf den Taschenrechner bei https:/
   - https://www.golem.de/news/dsa-diffie-hellman-primzahlen-koennen-hintertuer-enthalten-1610-123778.html
 
 ## Lizenz
+[![Creative Commons Lizenzvertrag](https://i.creativecommons.org/l/by/4.0/88x31.png "Creative Commons Lizenzvertrag")
+](http://creativecommons.org/licenses/by/4.0/)(rel="license")
+
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
     <img alt="Creative Commons Lizenzvertrag"
          style="border-width:0"
