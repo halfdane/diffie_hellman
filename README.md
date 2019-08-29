@@ -29,14 +29,6 @@ Um den Workshop vernünftig durchführen zu können brauchst du:
 
 Die Teilnehmer müssen während des Workshops auf den Taschenrechner bei https://halfdane.github.io/diffie_hellman/calc.html zugreifen, Internet-Zugang ist also nötig.
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-    <img alt="Creative Commons Lizenzvertrag"
-         style="border-width:0"
-         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>
-<br/>Dieses
-Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative
-Commons Namensnennung 4.0 International Lizenz</a>.
-
 ## Referenzen
 
 - Diese Präsentation
@@ -51,4 +43,13 @@ Commons Namensnennung 4.0 International Lizenz</a>.
 - Mehr
   - https://arstechnica.com/information-technology/2013/10/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
   - https://www.golem.de/news/dsa-diffie-hellman-primzahlen-koennen-hintertuer-enthalten-1610-123778.html
+
+## Lizenz
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+    <img alt="Creative Commons Lizenzvertrag"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/></a>
+<br/>Dieses
+Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative
+Commons Namensnennung 4.0 International Lizenz</a>.
 
