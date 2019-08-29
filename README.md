@@ -52,7 +52,14 @@ Die Teilnehmer müssen während des Workshops auf den Taschenrechner bei https:/
 
 [![Creative Commons Lizenzvertrag](https://i.creativecommons.org/l/by/4.0/88x31.png "Creative Commons Lizenzvertrag")
 ](http://creativecommons.org/licenses/by/4.0/)
-
 *"[Das "S" in "HTTPS" – Eine freundliche Einführung in die Kryptographie](https://github.com/halfdane/diffie_hellman)" 
 von [HalfDane](https://github.com/halfdane) steht unter einer [CC BY](https://creativecommons.org/licenses/by/4.0/) Lizenz*
+
+Durch die [CC BY](https://creativecommons.org/licenses/by/4.0/) Lizenz ist es dir erlaubt, dieses Werk zu verbreiten, 
+zu remixen, zu verbessern und darauf aufzubauen, auch kommerziell, solange [HalfDane](https://github.com/halfdane) 
+als Urheber des Originals genannt wird. 
+
+Empfohlene Urheber-Nennung: 
+> "[Das "S" in "HTTPS" – Eine freundliche Einführung in die Kryptographie](https://github.com/halfdane/diffie_hellman)"
+> von [HalfDane](https://github.com/halfdane). Verfügbar unter https://github.com/halfdane/diffie_hellman
 
