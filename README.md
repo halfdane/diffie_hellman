@@ -68,16 +68,16 @@ Empfohlene Urheber-Nennung:
 
 # The "S" in "HTTPS" – A friendly introduction into Cryptography
 ## Abstract
-The security of our digital communication is based on mathematical concepts that are often presented in a less than accessible way.
-As a result, even ideas as fundamental as the Diffie-Hellman Key Exchange are not well understood – often not even by technicians that deal with them daily.
 
-I am convinced that there's another way, and together we'll prove it.
+The security of our digital communications is based upon mathematical concepts that are often presented in a less than digestible form. 
+As a result even fundamental ideas such as the Diffie-Hellman Key Exchange are poorly understood. 
+More often than not even the engineers that deal with them on a daily basis fail to understand them fully.
 
-In this workshop, we'll have a close look at the mathematical mechanisms of the Diffie-Hellman Key Exchange without delving into group theory.
-Instead, the mechanisms are deduced from first principles and then experienced with a simple pen-and-paper implementation.
-In the end we'll generalize these ideas by casting a glance into an alternative implementation with elliptic curves.
+I am convinced that there is another way, and together we are going to prove it.
 
-The aim is to have the mathematical mechanisms of the Key Exchange come alive in an understandable and fun way, without degrading into a lecture in algebra.
-I am confident that both technicians an non-technicians will get their share of new and interesting findings.
+In this workshop, we will take a close look at the mathematical mechanisms of the Diffie-Hellman Key Exchange without delving into Group Theory. 
+Instead we will take a look at the mechanisms deduced from first principles and then walk through in a simple pen-and-paper implementation. 
+If we have enough time we will also try to generalise our learnings and take a look at an alternative implementation with elliptic curves.
 
-
+My hope is that without giving a lecture on algebra I can bring the mathematical mechanisms of Key Exchange alive in an understandable and fun way. 
+I am confident that not only engineers, but also non-engineers will gain many valuable insights from this workshop!
