@@ -1,3 +1,5 @@
+Please find the english version below.
+
 # Das "S" in "HTTPS" – Eine freundliche Einführung in die Kryptographie
 ## Abstract
 Die Sicherheit unserer digitalen Kommunikation basiert auf mathematischen Konzepten, 
@@ -62,4 +64,20 @@ als Urheber des Originals genannt wird.
 Empfohlene Urheber-Nennung: 
 > "[Das "S" in "HTTPS" – Eine freundliche Einführung in die Kryptographie](https://github.com/halfdane/diffie_hellman)"
 > von [HalfDane](https://github.com/halfdane). Verfügbar unter https://github.com/halfdane/diffie_hellman
+
+
+# The "S" in "HTTPS" – A friendly introduction into Cryptography
+## Abstract
+The security of our digital communication is based on mathematical concepts that are often presented in a less than accessible way.
+As a result, even ideas as fundamental as the Diffie-Hellman Key Exchange are not well understood – often not even by technicians that deal with them daily.
+
+I am convinced that there's another way, and together we'll prove it.
+
+In this workshop, we'll have a close look at the mathematical mechanisms of the Diffie-Hellman Key Exchange without delving into group theory.
+Instead, the mechanisms are deduced from first principles and then experienced with a simple pen-and-paper implementation.
+In the end we'll generalize these ideas by having a glance into an alternative implementation with elliptic curves.
+
+The aim is to have the mathematical mechanisms of the Key Exchange come alive in an understandable and fun way, without degrading into a lecture in algebra.
+I am confident that both technicians an non-technicians will get their share of new and interesting findings.
+
 
