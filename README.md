@@ -75,7 +75,7 @@ I am convinced that there's another way, and together we'll prove it.
 
 In this workshop, we'll have a close look at the mathematical mechanisms of the Diffie-Hellman Key Exchange without delving into group theory.
 Instead, the mechanisms are deduced from first principles and then experienced with a simple pen-and-paper implementation.
-In the end we'll generalize these ideas by having a glance into an alternative implementation with elliptic curves.
+In the end we'll generalize these ideas by casting a glance into an alternative implementation with elliptic curves.
 
 The aim is to have the mathematical mechanisms of the Key Exchange come alive in an understandable and fun way, without degrading into a lecture in algebra.
 I am confident that both technicians an non-technicians will get their share of new and interesting findings.
