@@ -1,86 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Diffie-Hellman Formel berechnen</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diffie-Hellman Key Exchange Experiment</title>
     <script src="https://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script>
+        function calculatePublicKey() {
+            const g = bigInt(document.getElementById("g").value || 1);
+            const p = bigInt(document.getElementById("p").value || 1);
+            const a = bigInt(document.getElementById("a").value || 1);
 
+            const A = g.modPow(a, p);
+            document.getElementById("A").value = A.toString();
+            calculateCommonKey();
+        }
+
+        function calculateCommonKey() {
+            const B = bigInt(document.getElementById("B").value || 1);
+            const a = bigInt(document.getElementById("a").value || 1);
+            const p = bigInt(document.getElementById("p").value || 1);
+            
+            const K = B.modPow(a, p);
+            document.getElementById("K").value = K.toString();
+        }
+
+        function generateRandomNumber() {
+            return Math.floor(Math.random() * 10);
+        }
+
+        function appendRandomToField(fieldId) {
+            const randomNum = generateRandomNumber();
+            const field = document.getElementById(fieldId);
+            field.value += randomNum;
+            field.dispatchEvent(new Event('input')); // Trigger input event to recalculate
+        }
+
+        function updateEncryption() {
+            const K = parseInt(document.getElementById("K").value) || 0;
+            const plaintext = document.getElementById("plaintext").value;
+            let encrypted = '';
+
+            for (let char of plaintext) {
+                encrypted += String.fromCharCode(char.charCodeAt(0) + K);
+            }
+
+            document.getElementById("encrypted").value = encrypted;
+        }
+
+        function updateDecryption() {
+            const K = parseInt(document.getElementById("K").value) || 0;
+            const encryptedText = document.getElementById("encryptedText").value;
+            let decrypted = '';
+
+            for (let char of encryptedText) {
+                decrypted += String.fromCharCode(char.charCodeAt(0) - K);
+            }
+
+            document.getElementById("decrypted").value = decrypted;
+        }
+    </script>
+    <style>
+        body {
+            max-width: 800px; /* Restrict width to 800px */
+            margin: 0 auto; /* Center the content */
+            padding: 20px; /* Add some padding */
+        }
+        .field-group {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .shared {
+            background-color: #d4edda; /* Light green for shared values */
+        }
+        .private {
+            background-color: #f8d7da; /* Light red for private values */
+        }
+        .random-button {
+            cursor: pointer;
+            margin-left: 10px; /* Margin to separate from input field */
+            font-size: 1em; /* Adjust size of the button text */
+            height: 36px; /* Match height to input field */
+            padding: 0 8px; /* Horizontal padding */
+        }
+        .arrow {
+            margin: 0 10px;
+        }
+        .group-container {
+            border: 2px solid #007bff; /* Blue border for grouping */
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .hint {
+            font-size: 0.8em; /* Smaller text for hints */
+            color: #555; /* Gray color for hints */
+        }
+        input {
+            width: 70%;
+        }
+    </style>
 </head>
 <body>
-
-    <section class="section">
-        <div class="container">
-            <h1 class="title">$g^a\:mod\:p=$</h1>
-
-            <div class="field is-horizontal">
-                <div class="field-body">
-                    <div class="field">
-                        <p class="control">
-                            <label class=" label">g</label>
-                            <input type="number" class="js_number input is-large" id="g_input">
-                        </p>
-                    </div>
-
-                    <div class="field">
-                        <p class="control">
-                            <label class="label">a</label>
-                            <input type="number" class="js_number input is-large" id="a_input">
-                        </p>
-                    </div>
-
-                    <div class="field">
-                        <p class="control">
-                            <label class="label">p</label>
-                            <input type="number" class="js_number input is-large" id="p_input">
-                        </p>
-                    </div>
-                </div>
-                <span class="title">=</span><span class="title" id="result"></span>
-            </div>
-
-            <div class="field">
-                <div class="control">
-                    <label class="label">Click for Random number</label>
-                    <button class="button is-link" id="random"><span id="randout">huhu</span></button>
-
-                </div>
-            </div>
+    <div class="group-container">
+        <h2>Diffie-Hellman Key Exchange Experiment</h2>
+        <div class="field-group shared">
+            <label for="g">Shared Generator (g):</label><br>
+            <input type="text" id="g" oninput="calculatePublicKey()">
+            <button class="random-button" onclick="appendRandomToField('g')" title="Append a random number">⚄</button>
+            <div class="hint">Only one party creates this and shares it with their partner</div>
         </div>
-    </section>
-<script>
-    function reactToInput() {
-        var g = bigInt(document.getElementById('g_input').value || 1);
-        var a = bigInt(document.getElementById('a_input').value || 1);
-        var p = bigInt(document.getElementById('p_input').value || 1);
-        document.getElementById('result').textContent = g.modPow(a, p);
-    }
 
-    document.body.addEventListener('input', reactToInput);
-    reactToInput();
+        <div class="field-group shared">
+            <label for="p">Shared Group (p):</label><br>
+            <input type="text" id="p" oninput="calculatePublicKey()">
+            <button class="random-button" onclick="appendRandomToField('p')" title="Append a random number">⚄</button>
+            <div class="hint">Only one party creates this and shares it with their partner</div>
+        </div>
 
-    function nextRan() {
-        var i = Math.floor(Math.random() * 10)
-        document.getElementById('randout').textContent = i;
-    }
-    document.getElementById('random').addEventListener('click', nextRan);
-    nextRan();
+        <div class="field-group private">
+            <label for="a">Private Key (a):</label><br>
+            <input type="text" id="a" oninput="calculatePublicKey()">
+            <button class="random-button" onclick="appendRandomToField('a')" title="Append a random number">⚄</button>
+            <div class="hint">Don't share this, it's your private key</div>
+        </div>
 
-</script>
+        <div class="field-group shared">
+            <label for="A">Public Key (A = g^a mod p):</label><br>
+            <input type="text" id="A">
+            <div class="hint">This is your public key - share it with your partner</div>
+        </div>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: {extensions: ["color.js"]},
-    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['\\[','\\]'], ['$$','$$']]}});
-</script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <div class="field-group shared">
+            <label for="B">Public Key of Partner (B):</label><br>
+            <input type="text" id="B" oninput="calculateCommonKey()">
+            <div class="hint">This is the public key your partner shared with you</div>
+        </div>
 
+        <div class="field-group private">
+            <label for="K">Common Key (K = B^a mod p):</label><br>
+            <input type="text" id="K">
+            <div class="hint">This is the common private key - your partner should have the same number!</div>
+        </div>
+    </div>
 
+    <div class="group-container">
+        <h2>Unsafe Encryption/Decryption (just adds/subtracts K)</h2>
+        <div class="field-group private">
+            <label for="plaintext">Encrypt:</label><br>
+            <input type="text" id="plaintext" oninput="updateEncryption()" placeholder="Plaintext">
+            <span class="arrow">→</span>
+            <input type="text" id="encrypted" readonly placeholder="Encrypted Text">
+        </div>
+
+        <div class="field-group private">
+            <label for="encryptedText">Decrypt:</label><br>
+            <input type="text" id="encryptedText" oninput="updateDecryption()" placeholder="Encrypted Text">
+            <span class="arrow">→</span>
+            <input type="text" id="decrypted" readonly placeholder="Plaintext">
+        </div>
+    </div>
 </body>
 </html>
