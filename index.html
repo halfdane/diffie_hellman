@@ -33,9 +33,33 @@
 
     <!-- Required Modernizr file -->
     <script src="deck.js/modernizr.custom.js"></script>
+    <style>  
+        .deck-container {
+            /* Border on all sides with 20px width */
+            border: 40px solid;
+            border-top-width: 0;
+            
+            box-sizing: border-box;
+            
+            /* Make border transparent by default */
+            border-color: transparent;
+            
+            /* Apply the border image just to left and right sides */
+            border-image: linear-gradient(to bottom, transparent 50%, #F0FAFF 50%) 1 100%;
+            border-image-slice: 0 1 1 1;
+        }
+        .logo {
+            position: absolute; 
+            right: 0; 
+            bottom: 0; 
+            width:150px; 
+            height: auto;
+        }
+    </style>
 </head>
 <body>
 <div class="deck-container">
+    <!-- <img class="logo" src="resources/img/logo.png" /> -->
 
     <div class="deck-loading-splash" style="background: green; font-size: 30px; font-family: Arial;">
         Securing The Cyber...
@@ -43,7 +67,7 @@
 
     <section class="slide">
         <h1>Das "S" in HTTPS</h1>
-        <a href="resources/img/DH-Form.odt">(Die Formulare)</a>
+        <a href="resources/img/DH-Form.odt" style="float: right;">(Die Formulare)</a>
     </section>
 
     <section class="slide intro">
