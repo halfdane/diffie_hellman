@@ -250,107 +250,19 @@
     <section class="slide">
         <h2>Taschenrechner</h2>
         <div class="theCalculator">
-            <p class="slide">Benutzt bitte nicht den Taschenrechner auf eurem Handy, der kann kein Modulo rechnen</p>
-            <p class="slide">Nein, auch nicht der auf dem IPhone!</p>
-
             <p class="link">https://halfdane.github.io/diffie_hellman/calc.html</p>
             <p class="link">https://tinyurl.com/y4mua3o8</p>
             <p><img src="resources/img/qrcode.png"/></p>
 
-            <p class="slide calculate_this">
-                <span>$42249 ^{17245}\:mod\:82713=$</span>
-                <span class="result">${\color{red}\:64293}$</span>
-            </p>
-
-            <div class="anim-show slide" data-what=".result"></div>
         </div>
     </section>
 
     <section class="slide">
-        <h2>Und so funktioniert's</h2>
+        <h2>Selber machen</h2>
         <div class="formulare">
-            <div class="primegroup center">g=23914<br>p=71929</div>
 
             <img class="form left" src="resources/img/DH-Form.png">
             <img class="form right" src="resources/img/DH-Form.png">
-
-            <div class="alice g hidden">23914</div>
-            <div class="bob g hidden">23914</div>
-
-            <div class="alice p hidden">71929</div>
-            <div class="bob p hidden">71929</div>
-
-            <div class="alice a hidden">13442</div>
-            <div class="bob a hidden">74873</div>
-
-            <div class="dh_formula1 center hidden">$$g^{a}\:mod\:p$$</div>
-
-            <div class="alice bigA raw hidden">$23914^{13442}\:mod\:71929$</div>
-            <div class="alice bigA result hidden">65439</div>
-
-            <div class="bob bigA formular hidden">$g^{a}\:mod\:p$</div>
-            <div class="bob bigA raw hidden">$23914^{74873}\:mod\:71929$</div>
-            <div class="bob bigA result hidden">8305</div>
-
-            <div class="alice bigB hidden">65439</div>
-            <div class="bob bigB hidden">8305</div>
-
-            <div class="dh_formula2 center hidden">$$B^{a}\:mod\:p$$</div>
-
-            <div class="alice bigK raw hidden">$8305^{13442}\:mod\:71929$</div>
-            <div class="alice bigK result hidden">20999</div>
-
-            <div class="bob bigK raw hidden">$65439^{74873}\:mod\:71929$</div>
-            <div class="bob bigK result hidden">20999</div>
-
-
-            <!-- someone selects the public parameters g, p -->
-            <div class="anim-show slide" data-what=".primegroup"></div>
-
-            <!-- alice and bob enter the public parameters-->
-            <div class="anim-removeclass slide anim-continue" data-what=".alice.g" data-class="hidden"></div>
-            <div class="anim-removeclass slide anim-continue" data-what=".alice.p" data-class="hidden"></div>
-            <div class="anim-removeclass slide anim-continue" data-what=".bob.g" data-class="hidden"></div>
-            <div class="anim-removeclass slide" data-what=".bob.p" data-class="hidden"></div>
-
-            <!-- alice and bob choose their private keys-->
-            <div class="anim-removeclass slide" data-what=".alice.a" data-class="hidden"></div>
-            <div class="anim-removeclass slide" data-what=".bob.a" data-class="hidden"></div>
-
-            <!-- show basic formula in the center-->
-            <div class="anim-removeclass slide" data-what=".dh_formula1" data-class="hidden"></div>
-
-            <!-- alice calculates her public key -->
-            <div class="anim-removeclass slide" data-what=".alice.bigA.raw" data-class="hidden"></div>
-            <div class="anim-addclass slide anim-continue" data-what=".alice.bigA.raw" data-class="hidden"></div>
-            <div class="anim-removeclass slide" data-what=".alice.bigA.result" data-class="hidden"></div>
-
-            <!-- bob calculates his public key-->
-            <div class="anim-removeclass slide" data-what=".bob.bigA.raw" data-class="hidden"></div>
-            <div class="anim-addclass slide anim-continue" data-what=".bob.bigA.raw" data-class="hidden"></div>
-            <div class="anim-removeclass slide" data-what=".bob.bigA.result" data-class="hidden"></div>
-
-            <!-- alice passes her public key over to bob -->
-            <div class="anim-removeclass slide anim-continue" data-what=".alice.bigB" data-class="hidden"></div>
-            <div class="anim-addclass slide" data-what=".alice.bigB" data-class="over"></div>
-
-            <!-- bob passes his public key over to alice-->
-            <div class="anim-removeclass slide anim-continue" data-what=".bob.bigB" data-class="hidden"></div>
-            <div class="anim-addclass slide" data-what=".bob.bigB" data-class="over"></div>
-
-
-            <!-- show basic formula in the center-->
-            <div class="anim-removeclass slide" data-what=".dh_formula2" data-class="hidden"></div>
-
-            <!-- alice calculates the shared key-->
-            <div class="anim-removeclass slide" data-what=".alice.bigK.raw" data-class="hidden"></div>
-            <div class="anim-addclass slide anim-continue" data-what=".alice.bigK.raw" data-class="hidden"></div>
-            <div class="anim-removeclass slide" data-what=".alice.bigK.result" data-class="hidden"></div>
-
-            <!-- bob calculates the shared key-->
-            <div class="anim-removeclass slide" data-what=".bob.bigK.raw" data-class="hidden"></div>
-            <div class="anim-addclass slide anim-continue" data-what=".bob.bigK.raw" data-class="hidden"></div>
-            <div class="anim-removeclass slide" data-what=".bob.bigK.result" data-class="hidden"></div>
         </div>
     </section>
 
