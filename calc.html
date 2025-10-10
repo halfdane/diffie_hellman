@@ -6,6 +6,9 @@
     <title>Diffie-Hellman Key Exchange Experiment</title>
     <script src="https://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
     <script>
+
+        const ALPHANUMERIC = "abcdefghijklmnopqrstuvwxyz0123456789"; 
+
         function calculatePublicKey() {
             const g = bigInt(document.getElementById("g").value || 1);
             const p = bigInt(document.getElementById("p").value || 1);
@@ -36,28 +39,58 @@
             field.dispatchEvent(new Event('input')); // Trigger input event to recalculate
         }
 
+        function encrypt(text, key) {
+        let result = "";
+        const bytes = new TextEncoder().encode(text);
+
+        for (let i = 0; i < bytes.length; i++) {
+            const byte = bytes[i];
+            const xorResult = byte ^ ((key + i) & 0xFF);
+
+            const firstIndex = Math.floor(xorResult / ALPHANUMERIC.length);
+            const secondIndex = xorResult % ALPHANUMERIC.length;
+            result += ALPHANUMERIC[firstIndex] + ALPHANUMERIC[secondIndex];
+        }
+        // Group ciphertext into blocks of 4 characters separated by spaces
+        result = result.replace(/(.{4})/g, '$1 ').trim();
+        return result;
+        }
+
+        function decrypt(text, key) {
+        // Remove all whitespace from ciphertext
+        text = text.replace(/\s/g, '');
+        let bytes = [];
+
+        for (let i = 0; i < text.length; i += 2) {
+            const firstIndex = ALPHANUMERIC.indexOf(text[i]);
+            const secondIndex = ALPHANUMERIC.indexOf(text[i + 1]);
+            const xorResult = firstIndex * ALPHANUMERIC.length + secondIndex;
+
+            const byte = xorResult ^ ((key + Math.floor(i / 2)) & 0xFF);
+            bytes.push(byte);
+        }
+        const result = new TextDecoder().decode(new Uint8Array(bytes));
+        return result;
+        }
+
+
         function updateEncryption() {
             const K = parseInt(document.getElementById("K").value) || 0;
             const plaintext = document.getElementById("plaintext").value;
-            let encrypted = '';
-
-            for (let char of plaintext) {
-                encrypted += String.fromCharCode(char.charCodeAt(0) + K);
-            }
-
+            let encrypted = encrypt(plaintext, K);
             document.getElementById("encrypted").value = encrypted;
         }
 
         function updateDecryption() {
             const K = parseInt(document.getElementById("K").value) || 0;
             const encryptedText = document.getElementById("encryptedText").value;
-            let decrypted = '';
-
-            for (let char of encryptedText) {
-                decrypted += String.fromCharCode(char.charCodeAt(0) - K);
-            }
-
+            let decrypted = decrypt(encryptedText, K);
             document.getElementById("decrypted").value = decrypted;
+        }
+
+        function updateCyphertext() {
+            const cyphertext = document.getElementById("encrypted").value;
+            document.getElementById("encryptedText").value = cyphertext;
         }
     </script>
     <style>
@@ -109,21 +142,21 @@
         <div class="field-group shared">
             <label for="g">Shared Generator (g):</label><br>
             <input type="text" id="g" oninput="calculatePublicKey()">
-            <!-- <button class="random-button" onclick="appendRandomToField('g')" title="Append a random number">⚄</button> -->
+            <button class="random-button" onclick="appendRandomToField('g')" title="Append a random number">⚄</button>
             <div class="hint">Only one party creates this and shares it with their partner</div>
         </div>
 
         <div class="field-group shared">
             <label for="p">Shared Group (p):</label><br>
             <input type="text" id="p" oninput="calculatePublicKey()">
-            <!-- <button class="random-button" onclick="appendRandomToField('p')" title="Append a random number">⚄</button> -->
+            <button class="random-button" onclick="appendRandomToField('p')" title="Append a random number">⚄</button>
             <div class="hint">Only one party creates this and shares it with their partner</div>
         </div>
 
         <div class="field-group private">
             <label for="a">Private Key (a):</label><br>
             <input type="text" id="a" oninput="calculatePublicKey()">
-            <!-- <button class="random-button" onclick="appendRandomToField('a')" title="Append a random number">⚄</button> -->
+            <button class="random-button" onclick="appendRandomToField('a')" title="Append a random number">⚄</button>
             <div class="hint">Don't share this, it's your private key</div>
         </div>
 
@@ -141,7 +174,7 @@
 
         <div class="field-group private">
             <label for="K">Common Key (K = B^a mod p):</label><br>
-            <input type="text" id="K">
+            <input type="text" id="K" oninput="updateEncryption(); updateCyphertext(); updateDecryption();">
             <div class="hint">This is the common private key - your partner should have the same number!</div>
         </div>
     </div>
